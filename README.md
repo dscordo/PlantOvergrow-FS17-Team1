@@ -10,6 +10,14 @@ This is a team project by Cristina, Deborah and Laura.
 - External APIs
 - Bootstrap
 
+## User flow
+
+![userflow](./RMimages/UserFlow.png)
+
+## Database schema
+
+![drawSQL](./RMimages/drawSQL.png)
+
 ## Notes
 
 _This is a student project that was created at [CodeOp](http://codeop.tech), a full stack development bootcamp in Barcelona._
