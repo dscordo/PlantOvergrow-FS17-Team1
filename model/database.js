@@ -12,7 +12,7 @@ const con = mysql.createConnection({
   host: DB_HOST || "127.0.0.1",
   user: DB_USER || "root",
   password: DB_PASS,
-  database: DB_NAME || "mvp",
+  database: DB_NAME || "plant_db",
   multipleStatements: true,
 });
 
@@ -20,9 +20,8 @@ con.connect(function (err) {
   if (err) throw err;
   console.log("Connected!");
 
-  //let sql =
-  //"DROP TABLE if exists mvp; CREATE TABLE mvp(id INT NOT NULL AUTO_INCREMENT, firstname VARCHAR(40) not null, lastname VARCHAR(40) not null, PRIMARY KEY (id));";//update
-  let sql = fs.readFileSync(__dirname + "/MVP_DB.sql").toString();
+  let sql = fs.readFileSync(__dirname + "/plant_db.sql").toString();
+  //maybe this should be plant_db_db or something...
 
   con.query(sql, function (err, result) {
     if (err) throw err;
