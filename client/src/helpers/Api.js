@@ -1,4 +1,5 @@
-// const BASE_URL =
+/**
+const BASE_URL = "hey";
 
 class Api {
     // Public
@@ -12,7 +13,7 @@ class Api {
     }
       /**
      * Private!
-     **/
+     **
 
        static async _myFetch(url, method = 'GET', body = null) {
         let options = { method };
@@ -46,3 +47,4 @@ class Api {
 
 
 export default Api;
+**/
