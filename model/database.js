@@ -20,7 +20,7 @@ con.connect(function (err) {
   if (err) throw err;
   console.log("Connected!");
 
-  let sql = fs.readFileSync(__dirname + "/plant_db.sql").toString();
+  let sql = fs.readFileSync(__dirname + "/plantovergrow.sql").toString();
   //maybe this should be plant_db_db or something...
 
   con.query(sql, function (err, result) {
