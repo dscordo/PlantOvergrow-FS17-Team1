@@ -10,6 +10,7 @@ import NavBar from './components/NavBar';
 
 import PrivateRoute from './components/PrivateRoute';
 import LoginView from './views/LoginView';
+import RegisterView from './views/RegisterView';
 import ErrorView from './views/ErrorView';
 import MembersOnlyView from './views/MembersOnlyView';
 import ProfileView from './views/ProfileView';
@@ -19,6 +20,8 @@ function App() {
   const [user, setUser] = useState(Local.getUser());
   const [loginErrorMsg, setLoginErrorMsg] = useState('');
   const navigate = useNavigate();
+  const [regErrorMsg, setRegErrorMsg] = useState('');
+ 
 
   async function doLogin(username, password) {
       let response = await AuthApi.loginUser(username, password);
@@ -31,16 +34,28 @@ function App() {
           setLoginErrorMsg('Login failed');
       }
   }
-
+  
   function doLogout() {
       Local.removeUserInfo();
       setUser(null);
       // We don't need the next line; the Logout <NavLink> will redirect for us
       // navigate('/');
   }
+
+  async function doRegister(newUser) {
+    let response = await AuthApi.registerUser(newUser);
+    if (response.ok) {
+        setRegErrorMsg('');
+        navigate('/');
+    } else {
+        setRegErrorMsg('Register failed');
+    }
+}
+
+
   return (
     <div className="App">
-      <h1>Plant Overgrow</h1>
+      
       <NavBar user={user} logoutCb={doLogout} />
 
 <div className="container">
@@ -62,6 +77,11 @@ function App() {
                 loginCb={(u, p) => doLogin(u, p)} 
                 loginError={loginErrorMsg} 
             />
+        } />
+         <Route path="/register" element={
+            <RegisterView 
+            registerCb={ (uo) => doRegister(uo)}
+          />
         } />
         <Route path="*" element={<ErrorView code="404" text="Page not found" />} />
     </Routes>

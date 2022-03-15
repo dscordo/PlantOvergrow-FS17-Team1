@@ -41,6 +41,35 @@ class AuthApi {
     }
 
     /**
+     * register a user
+     **/
+    static async registerUser(newUser) {
+        // Prepare URL and options
+        let url = '/register';
+      
+        let options = { 
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(newUser)
+        };
+
+        // Fetch!
+        let response;
+        try {
+            response = await fetch(url, options);
+            if (response.ok) {
+                response.data = await response.json();
+            } else {
+                response.error = `Error ${response.status}: ${response.statusText}`;
+            }
+        } catch (err) {
+            response = { ok: false, error: err.message };
+        }
+
+        return response;
+    }
+
+    /**
      * Get all users 
      **/
 
