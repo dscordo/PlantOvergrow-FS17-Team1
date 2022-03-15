@@ -12,9 +12,10 @@ import PrivateRoute from './components/PrivateRoute';
 import LoginView from './views/LoginView';
 import RegisterView from './views/RegisterView';
 import ErrorView from './views/ErrorView';
-import MembersOnlyView from './views/MembersOnlyView';
+import MyPlantsView from './views/MyPlantsView';
 import ProfileView from './views/ProfileView';
 import UsersView from './views/UsersView';
+import Wishlist from './views/Wishlist';
 
 function App() {
   const [user, setUser] = useState(Local.getUser());
@@ -67,9 +68,14 @@ function App() {
                 <ProfileView />
             </PrivateRoute>
         } />
-        <Route path="/members-only" element={
+        <Route path="/plantinfo" element={
             <PrivateRoute>
-                <MembersOnlyView />
+                <MyPlantsView />
+            </PrivateRoute>
+        } />
+          <Route path="/wishlist" element={
+            <PrivateRoute>
+                <Wishlist />
             </PrivateRoute>
         } />
         <Route path="/login" element={
