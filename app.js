@@ -9,6 +9,8 @@ var authRouter = require('./routes/auth');
 var plantInfoRouter = require('./routes/plantinfo');
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
+var plantinfoRouter = require("./routes/plantinfo");
+var wishlistRouter = require("./routes/wishlist");
 
 var app = express();
 
@@ -23,6 +25,8 @@ app.use('/', authRouter);
 app.use('/plantinfo', plantInfoRouter); 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+app.use("/plantinfo", plantinfoRouter);
+app.use("/wishlist", wishlistRouter);
 
 // Catch 404 and forward to error handler
 app.use(function(req, res, next) {
