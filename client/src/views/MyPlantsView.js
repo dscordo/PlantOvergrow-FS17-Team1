@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import Api from '../helpers/Api';
+import AuthApi from '../helpers/AuthApi';
 
 
-function MembersOnlyView(props) {
+function MyPlantsView(props) {
     const [memberMsg, setMemberMsg] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
 
@@ -12,7 +12,7 @@ function MembersOnlyView(props) {
 
     async function fetchMemberMsg() {
         // Get "Members Only" message for authenticated users
-        let response = await Api.getContent('/members-only');
+        let response = await AuthApi.getContent('/plantinfo');
         if (response.ok) {
             setMemberMsg(response.data.message);
             setErrorMsg('');
@@ -31,11 +31,11 @@ function MembersOnlyView(props) {
     }
 
     return (
-        <div className="MembersOnlyView">
-            <h1>Members Only</h1>
+        <div className="MyPlants">
+            <h1>My Plants</h1>
             <p>{memberMsg}</p>
         </div>
     );
 }
 
-export default MembersOnlyView;
+export default MyPlantsView;

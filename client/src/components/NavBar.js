@@ -24,9 +24,19 @@ function NavBar(props) {
                         {
                             props.user && (
                                 <li className="nav-item">
-                                    <NavLink className="nav-link" to="/members-only">Members Only</NavLink>
+                                    <NavLink className="nav-link" to="/plantinfo">My Plants</NavLink>
                                 </li>
-                            )
+                                
+                            ) 
+                            // (<li className="nav-item">
+                            // <NavLink className="nav-link" to="/wishlist">Wishlist</NavLink>
+                            // </li>)
+                        }
+                         {
+                            props.user && (
+                              <li className="nav-item">
+                            <NavLink className="nav-link" to="/wishlist">Wishlist</NavLink>
+                            </li>)
                         }
                     </ul>
                 </div>
