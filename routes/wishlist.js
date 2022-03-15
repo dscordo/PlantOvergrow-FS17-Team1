@@ -1,8 +1,10 @@
 var express = require("express");
 var router = express.Router();
 const db = require("../model/helper");
+const { ensureUserLoggedIn } = require("../middleware/guards");
+
 //working
-router.get("/", async (req, res) => {
+router.get("/", ensureUserLoggedIn, async (req, res) => {
   try {
     let results = await db("SELECT * FROM wishlist ORDER BY id ASC;");
 
@@ -12,7 +14,7 @@ router.get("/", async (req, res) => {
   }
 });
 //working
-router.get("/:id", async (req, res, next) => {
+router.get("/:id", ensureUserLoggedIn, async (req, res, next) => {
   let id = req.params.id;
   try {
     let result = await db(`SELECT * FROM wishlist WHERE  id = ${id}`);
@@ -26,7 +28,7 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 //working
-router.post("/", async (req, res) => {
+router.post("/", ensureUserLoggedIn, async (req, res) => {
   let { userid, pid, notes } = req.body;
 
   let sql = `
@@ -45,7 +47,7 @@ router.post("/", async (req, res) => {
   }
 });
 //working for notes and we don't need anymore.
-router.patch("/:id", async (req, res) => {
+router.patch("/:id", ensureUserLoggedIn, async (req, res) => {
   let id = req.params.id;
   let { notes } = req.body;
   let sqlCheckID = `SELECT * FROM wishlist WHERE id = ${id}`;
@@ -65,7 +67,7 @@ router.patch("/:id", async (req, res) => {
   }
 });
 //working
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", ensureUserLoggedIn, async (req, res) => {
   let id = req.params.id;
   try {
     let result = await db(`SELECT * FROM wishlist WHERE  id = ${id}`);

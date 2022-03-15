@@ -1,8 +1,10 @@
 var express = require("express");
 var router = express.Router();
 const db = require("../model/helper");
+const { ensureUserLoggedIn } = require("../middleware/guards");
+
 //working
-router.get("/", async (req, res) => {
+router.get("/", ensureUserLoggedIn, async (req, res) => {
   try {
     let results = await db("SELECT * FROM plantinfo ORDER BY id ASC;");
 
@@ -12,7 +14,7 @@ router.get("/", async (req, res) => {
   }
 });
 //working
-router.get("/:id", async (req, res, next) => {
+router.get("/:id", ensureUserLoggedIn, async (req, res, next) => {
   let id = req.params.id;
   try {
     let result = await db(`SELECT * FROM plantinfo WHERE  id = ${id}`);
@@ -27,7 +29,7 @@ router.get("/:id", async (req, res, next) => {
 });
 
 //working
-router.post("/", async (req, res) => {
+router.post("/", ensureUserLoggedIn, async (req, res) => {
   let {
     userid,
     pid,
@@ -54,19 +56,18 @@ router.post("/", async (req, res) => {
     res.status(500).send({ error: err.message }, "***on catch");
   }
 });
-//working, only for notes, waiting on Jim's for rest
-router.patch("/:id", async (req, res) => {
-  let id = req.params.id;
-  let { notes } = req.body;
-  let sqlCheckID = `SELECT * FROM plantinfo WHERE id = ${id}`;
-  let sqlUpdate = `UPDATE plantinfo SET notes = '${notes}' WHERE id = ${id}`;
 
+//working
+router.patch("/:id", ensureUserLoggedIn, async (req, res) => {
+  let { id } = req.params;
+  let sql = makePatchSql(req.body, id);
+  let sqlcheck = `SELECT * FROM plantinfo WHERE id = ${id}`;
   try {
-    let result = await db(sqlCheckID);
+    let result = await db(sqlcheck);
     if (result.data.length === 0) {
-      res.status(404).send({ error: "plant not found!" });
+      res.status(404).send({ error: "plant not found!" }); //sending me here after patch
     } else {
-      await db(sqlUpdate);
+      await db(sql);
       let result = await db("select * from plantinfo");
       res.status(201).send(result.data);
     }
@@ -75,8 +76,41 @@ router.patch("/:id", async (req, res) => {
   }
 });
 
+// PATCH helper function
+function makePatchSql(body, id) {
+  let parts = [];
+
+  if ("pid" in body) {
+    parts.push(`pid = '${body["pid"]}'`);
+  }
+  if ("lastwater" in body) {
+    parts.push(`lastwater = '${body["lastwater"]}'`);
+  }
+  if ("lastfert" in body) {
+    parts.push(`lastfert = '${body["lastfert"]}'`);
+  }
+  if ("lastrepot" in body) {
+    parts.push(`lastrepot = '${body["lastrepot"]}'`);
+  }
+  if ("notes" in body) {
+    parts.push(`notes = '${body["notes"]}'`);
+  }
+  if ("userimage" in body) {
+    parts.push(`userimage = '${body["userimage"]}'`);
+  }
+  if ("startdate" in body) {
+    parts.push(`startdate = '${body["startdate"]}'`);
+  }
+
+  let sql = "UPDATE plantinfo SET ";
+  sql += parts.join(", ");
+  sql += ` WHERE id = ${id}`;
+
+  return sql;
+}
+
 //working
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", ensureUserLoggedIn, async (req, res) => {
   let id = req.params.id;
   try {
     let result = await db(`SELECT * FROM plantinfo WHERE  id = ${id}`);
