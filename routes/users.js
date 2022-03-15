@@ -5,7 +5,7 @@ const db = require("../model/helper");
 
 /* GET users listing. */
 router.get('/', async function(req, res, next) {
-  let sql = 'SELECT * FROM users ORDER BY username';
+  let sql = 'SELECT * FROM users ORDER BY name';
 
   try {
       let results = await db(sql);
