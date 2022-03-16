@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Api from '../helpers/Api';
+import AuthApi from '../helpers/AuthApi';
 
 
 function UsersView(props) {
@@ -11,7 +11,7 @@ function UsersView(props) {
     }, []);
 
     async function fetchUsers() {
-        let response = await Api.getUsers();
+        let response = await AuthApi.getUsers();
         if (response.ok) {
             setUsers(response.data);
             setErrorMsg('');
