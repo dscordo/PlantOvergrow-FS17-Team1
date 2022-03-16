@@ -1,24 +1,23 @@
 import React, { useEffect, useState } from "react";
 import AuthApi from "../helpers/AuthApi";
 import { useParams } from "react-router-dom";
+import Local from '../helpers/Local';
 
 export default function MyPlantDetail(props) {
-  let emptyplant = {
-    id: 1,
-    userid: "",
-    pid: "",
-    lastwater: "",
-    lastfert: "",
-    lastrepot: "",
-    notes: "",
-    userimage: "",
-    startdate: "",
-  };
+
   const [plantDetail, setPlantDetail] = useState([]);
   const [errorMsg, setErrorMsg] = useState("");
-  /* let p = props.x; */
-  let { id, pid } = useParams();
+  const [editNotes, setEditNotes] = useState(false);
   const [edit, setEdit] = useState();
+  const [patchPlant, setPatchPlant] = useState({});
+
+  const handleChangeN = (e) => {
+    setPatchPlant({ [e.target.name]: e.target.value });
+  };
+
+  
+  let { id, pid } = useParams();
+ 
 
   useEffect(() => {
     showPlantDetail();
@@ -27,50 +26,53 @@ export default function MyPlantDetail(props) {
   async function showPlantDetail() {
     let response = await AuthApi.getContent(`/plantinfo/${id}`);
     if (response.ok) {
-      console.log(response.data, "hello");
       setPlantDetail(response.data);
       setErrorMsg("");
     } else {
       setPlantDetail();
       setErrorMsg(response.error);
     }
-  }
+  };
 
-  //trying from restaurants
+  const handleSubmitN = (e) => {
+    // e.preventDefault();
+    //call PATCH logic
+    doPatch(id, patchPlant);
+    setEditNotes(false);
+  };
 
-  async function doEdit(id) {
-    let edit = {
-      /* pid: "",
-      lastwater: "",
-      lastfert: "",
-      lastrepot: "",
-      notes: "",
-      userimage: "",
-      startdate: "", */
-    };
+  //patch working
 
+  async function doPatch(id, patchPlant) {
     let options = {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(edit),
+      body: JSON.stringify(patchPlant),
     };
+    console.log("patch log", id, patchPlant, options.body);
+
+    let token = Local.getToken();
+    if (token) {
+        options.headers['Authorization'] = 'Bearer ' + token;
+    }
 
     let data = null;
     try {
       let response = await fetch(`/plantinfo/${id}`, options);
       if (response.ok) {
         data = await response.json();
-        setEdit("");
-        /* setItems(data); */
+        setPatchPlant("");
+        setPlantDetail(data);
+       
       } else {
         console.log("server error:", response.statusText);
       }
     } catch (e) {
       console.log("network error:", e.message);
     }
-  }
+  };
 
   return (
     <div className="MyPlantDetail">
@@ -78,7 +80,23 @@ export default function MyPlantDetail(props) {
         {plantDetail.map((p) => (
           <div className="Container" key={p.id}>
             <h3>{p.pid}</h3>
-            <p>{p.notes}</p>
+            {editNotes ? (
+        <div className="input-group">
+          <input
+            type="text"
+            name="notes"
+            value={patchPlant.notes}
+            onChange={handleChangeN}
+          />
+          <button type="button" className="btn btn-success" onClick={() => handleSubmitN(patchPlant)}>Save</button>
+        </div>
+         
+      ) : (
+        <div>
+          <p>{p.notes}</p>
+          <button type="button" className="btn btn-success" onClick={() => setEditNotes(true)}>Edit notes</button>
+        </div>
+      )}
             <ul>
               <li>{p.lastwater}</li>
               <li>{p.lastfert}</li>
