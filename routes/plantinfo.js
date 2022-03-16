@@ -4,15 +4,18 @@ const db = require("../model/helper");
 const { ensureUserLoggedIn } = require("../middleware/guards");
 
 //working
-router.get("/", ensureUserLoggedIn, async (req, res) => {
-  try {
-    let results = await db("SELECT * FROM plantinfo ORDER BY id ASC;");
+router.get(
+  "/",
+  /* ensureUserLoggedIn, */ async (req, res) => {
+    try {
+      let results = await db("SELECT * FROM plantinfo ORDER BY id ASC;");
 
-    res.send(results.data);
-  } catch (err) {
-    res.status(500).send({ error: err.message });
+      res.send(results.data);
+    } catch (err) {
+      res.status(500).send({ error: err.message });
+    }
   }
-});
+);
 //working
 router.get("/:id", ensureUserLoggedIn, async (req, res, next) => {
   let id = req.params.id;
