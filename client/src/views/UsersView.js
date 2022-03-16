@@ -34,7 +34,7 @@ function UsersView(props) {
             <h1>Users</h1>
             <ul>
             {
-                users.map(u => <li key={u.id}>{u.username}</li>)
+                users.map(u => <li key={u.id}>{u.name}</li>)
             }
             </ul>
         </div>
