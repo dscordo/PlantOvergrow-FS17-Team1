@@ -16,6 +16,9 @@ import MyPlantsView from './views/MyPlantsView';
 import ProfileView from './views/ProfileView';
 import UsersView from './views/UsersView';
 import Wishlist from './views/Wishlist';
+import SearchPlantView from './views/SearchPlantView';
+import SearchDetailView from './views/SearchDetailView';
+import PlantCard from "./views/PlantCard";
 
 function App() {
   const [user, setUser] = useState(Local.getUser());
@@ -89,6 +92,9 @@ function App() {
             registerCb={ (uo) => doRegister(uo)}
           />
         } />
+        <Route path="/SearchPlant" element={<SearchPlantView />}/>
+        <Route path="/SearchView" element={<SearchDetailView />}/>
+        <Route path="/PlantCard" element={<PlantCard />}/>
         <Route path="*" element={<ErrorView code="404" text="Page not found" />} />
     </Routes>
 </div>
