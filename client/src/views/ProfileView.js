@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import Api from '../helpers/Api';
+import AuthApi from '../helpers/AuthApi';
 
 
 function ProfileView(props) {
@@ -13,7 +13,7 @@ function ProfileView(props) {
     }, []);
 
     async function fetchProfile() {
-        let response = await Api.getUser(userId);
+        let response = await AuthApi.getUser(userId);
         if (response.ok) {
             setUser(response.data);
             setErrorMsg('');
