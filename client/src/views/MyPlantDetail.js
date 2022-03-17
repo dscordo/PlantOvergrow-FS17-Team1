@@ -101,7 +101,7 @@ export default function MyPlantDetail(props) {
               </div>
             )}
             <ul>
-              <li>
+              <li>Last watered: 
                 {p.lastwater}
                 <form>
                   <button
@@ -110,13 +110,13 @@ export default function MyPlantDetail(props) {
                     name="lastwater"
                     onClick={(e) => doPatch(p.id, { lastwater: "pitipum" })}
                   >
-                   {<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-droplet-fill" viewBox="0 0 16 16">
+                   {<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-droplet-fill" viewBox="0 0 16 16">
   <path d="M8 16a6 6 0 0 0 6-6c0-1.655-1.122-2.904-2.432-4.362C10.254 4.176 8.75 2.503 8 0c0 0-6 5.686-6 10a6 6 0 0 0 6 6ZM6.646 4.646l.708.708c-.29.29-1.128 1.311-1.907 2.87l-.894-.448c.82-1.641 1.717-2.753 2.093-3.13Z"/>
 </svg>}
                   </button>
                 </form>
               </li>
-              <li>
+              <li> Last fertilize: 
                 {p.lastfert}
                 <form>
                   <button
@@ -125,13 +125,13 @@ export default function MyPlantDetail(props) {
                     name="lastfert"
                     onClick={(e) => doPatch(p.id, { lastfert: "pitipum" })}
                   >
-                    {<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                    {<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-plus-circle-fill" viewBox="0 0 16 16">
   <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
 </svg>}
                   </button>
                 </form>
               </li>
-              <li>
+              <li> Last repot: 
                 {p.lastrepot}
                 <form>
                   <button
@@ -140,10 +140,7 @@ export default function MyPlantDetail(props) {
                     name="lastrepot"
                     onClick={(e) => doPatch(p.id, { lastrepot: "pitipum" })}
                   >
-                    {<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
-  <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
-</svg>}
+                   <svg id="Flower_Pot" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"><path d="M207.4375,304.895a19.808,19.808,0,0,0,27.0582,7.25l1.6963-.9794v1.9587a19.808,19.808,0,0,0,39.616,0v-1.9587l1.6963.9794a19.808,19.808,0,0,0,19.808-34.3085l-1.6963-.9794,1.6963-.9792a19.8081,19.8081,0,0,0-19.808-34.3086l-1.6963.98V240.59a19.808,19.808,0,1,0-39.616,0v1.9588l-1.6963-.98a19.8081,19.8081,0,0,0-19.808,34.3086l1.6963.9792-1.6963.9794A19.808,19.808,0,0,0,207.4375,304.895ZM256,255.8784a20.979,20.979,0,1,1-20.9795,20.9795A21.003,21.003,0,0,1,256,255.8784Z"/><path d="M383.1953,130.4282H128.8047a4.5,4.5,0,0,0-4.5,4.5v55.94a4.5,4.5,0,0,0,4.5,4.5h13.7244l30.0764,164.9384A25.9038,25.9038,0,0,0,198.1,381.5718H313.9a25.9038,25.9038,0,0,0,25.4941-21.2647l30.0764-164.9384h13.7244a4.5,4.5,0,0,0,4.5-4.5v-55.94A4.5,4.5,0,0,0,383.1953,130.4282ZM330.541,358.6919a16.9078,16.9078,0,0,1-16.6406,13.88H198.1a16.9078,16.9078,0,0,1-16.6406-13.88L151.677,195.3687H360.323Zm48.1543-172.3232H133.3047v-46.94H378.6953Z"/></svg>
                   </button>
                 </form>
               </li>
