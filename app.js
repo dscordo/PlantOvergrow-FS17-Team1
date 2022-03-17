@@ -11,6 +11,7 @@ var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var plantinfoRouter = require("./routes/plantinfo");
 var wishlistRouter = require("./routes/wishlist");
+var externalApi = require('./routes/externalApi');
 
 var app = express();
 
@@ -27,6 +28,7 @@ app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/plantinfo", plantinfoRouter);
 app.use("/wishlist", wishlistRouter);
+app.use("/externalApi", externalApi);
 
 // Catch 404 and forward to error handler
 app.use(function(req, res, next) {
