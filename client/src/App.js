@@ -111,7 +111,7 @@ function App() {
           />
           <Route path="/SearchPlant" element={<SearchPlantView />} />
           <Route path="/SearchView" element={<SearchDetailView />} />
-          <Route path="/PlantCard" element={<PlantCard />} />
+          <Route path="/PlantCard/:pid" element={<PlantCard />} />
           <Route
             path="*"
             element={<ErrorView code="404" text="Page not found" />}
