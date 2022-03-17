@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import AuthApi from "../helpers/AuthApi";
 import { useParams } from "react-router-dom";
 import Local from "../helpers/Local";
+import { DateTime } from "luxon";
 
 export default function MyPlantDetail(props) {
   const [plantDetail, setPlantDetail] = useState([]);
   const [errorMsg, setErrorMsg] = useState("");
   const [editNotes, setEditNotes] = useState(false);
   const [patchPlant, setPatchPlant] = useState({});
-
   let { id, pid } = useParams();
 
   useEffect(() => {
@@ -102,7 +102,10 @@ export default function MyPlantDetail(props) {
             )}
             <ul>
               <li>
-                {p.lastwater}
+                {DateTime.fromISO(p.lastwater).toLocaleString(
+                  DateTime.DATETIME_SHORT
+                )}
+
                 <form>
                   <button
                     type="button"
@@ -110,14 +113,24 @@ export default function MyPlantDetail(props) {
                     name="lastwater"
                     onClick={(e) => doPatch(p.id, { lastwater: "pitipum" })}
                   >
-                   {<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-droplet-fill" viewBox="0 0 16 16">
-  <path d="M8 16a6 6 0 0 0 6-6c0-1.655-1.122-2.904-2.432-4.362C10.254 4.176 8.75 2.503 8 0c0 0-6 5.686-6 10a6 6 0 0 0 6 6ZM6.646 4.646l.708.708c-.29.29-1.128 1.311-1.907 2.87l-.894-.448c.82-1.641 1.717-2.753 2.093-3.13Z"/>
-</svg>}
+                    {
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        class="bi bi-droplet-fill"
+                        viewBox="0 0 16 16"
+                      >
+                        <path d="M8 16a6 6 0 0 0 6-6c0-1.655-1.122-2.904-2.432-4.362C10.254 4.176 8.75 2.503 8 0c0 0-6 5.686-6 10a6 6 0 0 0 6 6ZM6.646 4.646l.708.708c-.29.29-1.128 1.311-1.907 2.87l-.894-.448c.82-1.641 1.717-2.753 2.093-3.13Z" />
+                      </svg>
+                    }
                   </button>
                 </form>
               </li>
               <li>
-                {p.lastfert}
+                {DateTime.fromISO(p.lastfert).toLocaleString()}
+
                 <form>
                   <button
                     type="button"
@@ -125,14 +138,24 @@ export default function MyPlantDetail(props) {
                     name="lastfert"
                     onClick={(e) => doPatch(p.id, { lastfert: "pitipum" })}
                   >
-                    {<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
-  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
-</svg>}
+                    {
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        class="bi bi-plus-circle-fill"
+                        viewBox="0 0 16 16"
+                      >
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+                      </svg>
+                    }
                   </button>
                 </form>
               </li>
               <li>
-                {p.lastrepot}
+                {DateTime.fromISO(p.lastrepot).toLocaleString()}
+
                 <form>
                   <button
                     type="button"
@@ -140,10 +163,25 @@ export default function MyPlantDetail(props) {
                     name="lastrepot"
                     onClick={(e) => doPatch(p.id, { lastrepot: "pitipum" })}
                   >
-                    {<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
-  <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
-</svg>}
+                    {
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        class="bi bi-house-fill"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"
+                        />
+                        <path
+                          fill-rule="evenodd"
+                          d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"
+                        />
+                      </svg>
+                    }
                   </button>
                 </form>
               </li>
