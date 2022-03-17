@@ -84,13 +84,13 @@ function makePatchSql(body, id) {
     parts.push(`pid = '${body["pid"]}'`);
   }
   if ("lastwater" in body) {
-    parts.push(`lastwater = '${body["lastwater"]}'`);
+    parts.push(`lastwater = NOW()`);
   }
   if ("lastfert" in body) {
-    parts.push(`lastfert = '${body["lastfert"]}'`);
+    parts.push(`lastfert = NOW()`);
   }
   if ("lastrepot" in body) {
-    parts.push(`lastrepot = '${body["lastrepot"]}'`);
+    parts.push(`lastrepot = NOW()`);
   }
   if ("notes" in body) {
     parts.push(`notes = '${body["notes"]}'`);
