@@ -19,6 +19,9 @@ function NavBar(props) {
                             <NavLink className="nav-link" to="/">Home</NavLink>
                         </li>
                         <li className="nav-item">
+                            <NavLink className="nav-link" to="/SearchPlant">Search Plants</NavLink>
+                        </li>
+                        <li className="nav-item">
                             <NavLink className="nav-link" to="/users">Users</NavLink>
                         </li>
                         {
@@ -28,9 +31,6 @@ function NavBar(props) {
                                 </li>
                                 
                             ) 
-                            // (<li className="nav-item">
-                            // <NavLink className="nav-link" to="/wishlist">Wishlist</NavLink>
-                            // </li>)
                         }
                          {
                             props.user && (
