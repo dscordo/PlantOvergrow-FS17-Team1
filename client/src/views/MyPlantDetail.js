@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import AuthApi from "../helpers/AuthApi";
 import { useParams } from "react-router-dom";
 import Local from "../helpers/Local";
-import { DateTime } from "luxon";
+import { DateTime, Interval } from "luxon";
 
 export default function MyPlantDetail(props) {
   const [plantDetail, setPlantDetail] = useState([]);
@@ -101,11 +101,19 @@ export default function MyPlantDetail(props) {
               </div>
             )}
             <ul>
+              <li>Recommended frequency: every {p.wfreq} days</li>
               <li>
-                Last watered:
-                {DateTime.fromISO(p.lastwater).toLocaleString(
-                  DateTime.DATETIME_SHORT
-                )}
+                Last watered:{" "}
+                {Math.floor(
+                  Interval.fromDateTimes(
+                    DateTime.fromISO(p.lastwater),
+                    DateTime.now()
+                  ).toDuration(["days"]).values.days
+                )}{" "}
+                days ago
+              </li>
+
+              <li>
                 <form>
                   <button
                     type="button"
@@ -119,7 +127,7 @@ export default function MyPlantDetail(props) {
                         width="16"
                         height="16"
                         fill="currentColor"
-                        class="bi bi-droplet-fill"
+                        className="bi bi-droplet-fill"
                         viewBox="0 0 16 16"
                       >
                         <path d="M8 16a6 6 0 0 0 6-6c0-1.655-1.122-2.904-2.432-4.362C10.254 4.176 8.75 2.503 8 0c0 0-6 5.686-6 10a6 6 0 0 0 6 6ZM6.646 4.646l.708.708c-.29.29-1.128 1.311-1.907 2.87l-.894-.448c.82-1.641 1.717-2.753 2.093-3.13Z" />
@@ -128,10 +136,19 @@ export default function MyPlantDetail(props) {
                   </button>
                 </form>
               </li>
+              <li>Recommended frequency: every {p.fertfreq} days</li>
+              <li>
+                Last fertilized:{" "}
+                {Math.floor(
+                  Interval.fromDateTimes(
+                    DateTime.fromISO(p.lastfert),
+                    DateTime.now()
+                  ).toDuration(["days"]).values.days
+                )}{" "}
+                days ago
+              </li>
               <li>
                 {" "}
-                Last fertilized:
-                {DateTime.fromISO(p.lastfert).toLocaleString()}
                 <form>
                   <button
                     type="button"
@@ -155,9 +172,18 @@ export default function MyPlantDetail(props) {
                 </form>
               </li>
               <li>
+                Last repotted:{" "}
+                {Math.floor(
+                  Interval.fromDateTimes(
+                    DateTime.fromISO(p.lastrepot),
+                    DateTime.now()
+                  ).toDuration(["days"]).values.days
+                )}{" "}
+                days ago
+              </li>
+
+              <li>
                 {" "}
-                Last repotted:
-                {DateTime.fromISO(p.lastrepot).toLocaleString()}
                 <form>
                   <button
                     type="button"
@@ -171,15 +197,15 @@ export default function MyPlantDetail(props) {
                         width="16"
                         height="16"
                         fill="currentColor"
-                        class="bi bi-house-fill"
+                        className="bi bi-house-fill"
                         viewBox="0 0 16 16"
                       >
                         <path
-                          fill-rule="evenodd"
+                          fillRule="evenodd"
                           d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"
                         />
                         <path
-                          fill-rule="evenodd"
+                          fillRule="evenodd"
                           d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"
                         />
                       </svg>
