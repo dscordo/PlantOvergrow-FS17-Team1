@@ -6,18 +6,19 @@ const { ensureUserLoggedIn } = require("../middleware/guards");
 //working
 router.get("/", ensureUserLoggedIn, async (req, res) => {
   try {
-    let results = await db("SELECT * FROM plantinfo ORDER BY id ASC;");
+    let results = await db(`SELECT * FROM plantinfo WHERE userid = ${req.userId} ORDER BY id ASC;`);
 
     res.send(results.data);
   } catch (err) {
     res.status(500).send({ error: err.message });
   }
 });
+
 //working
 router.get("/:id", ensureUserLoggedIn, async (req, res, next) => {
   let id = req.params.id;
   try {
-    let result = await db(`SELECT * FROM plantinfo WHERE  id = ${id}`);
+    let result = await db(`SELECT * FROM plantinfo WHERE id = ${id} and userid = ${req.userId};`);
     if (result.data.length === 1) {
       res.send(result.data);
     } else {
@@ -28,28 +29,30 @@ router.get("/:id", ensureUserLoggedIn, async (req, res, next) => {
   }
 });
 
-//working
+//CHECK IF WORKING WITH USERID
 router.post("/", ensureUserLoggedIn, async (req, res) => {
   let {
-    userid,
     pid,
+    pname,
     lastwater,
     lastfert,
     lastrepot,
+    wfreq,
+    fertfreq,
     notes,
     userimage,
     startdate,
   } = req.body;
 
   let sql = `
-  INSERT INTO plantinfo (userid, pid, lastwater, lastfert, lastrepot, notes, userimage, startdate) 
-  VALUES ('${userid}','${pid}','${lastwater}','${lastfert}','${lastrepot}','${notes}','${userimage}','${startdate}');
+  INSERT INTO plantinfo ( pid, pname, lastwater, lastfert, lastrepot, wfreq, fertfreq, notes, userimage, startdate) 
+  VALUES ('${pid}','${pname}','${lastwater}','${lastfert}','${lastrepot}','${wfreq}','${fertfreq}','${notes}','${userimage}','${startdate}');
 `;
 
   try {
     await db(sql);
 
-    let result = await db("SELECT * FROM plantinfo");
+    let result = await db(`SELECT * FROM plantinfo WHERE userid = ${req.userId} and userid = ${req.userId}`);
 
     res.send(result.data);
   } catch (err) {
@@ -61,7 +64,7 @@ router.post("/", ensureUserLoggedIn, async (req, res) => {
 router.patch("/:id", ensureUserLoggedIn, async (req, res) => {
   let { id } = req.params;
   let sql = makePatchSql(req.body, id);
-  let sqlcheck = `SELECT * FROM plantinfo WHERE id = ${id}`;
+  let sqlcheck = `SELECT * FROM plantinfo WHERE id = ${id} and userid = ${req.userId}`;
   try {
     let result = await db(sqlcheck);
     if (result.data.length === 0) {
@@ -82,6 +85,9 @@ function makePatchSql(body, id) {
 
   if ("pid" in body) {
     parts.push(`pid = '${body["pid"]}'`);
+  }
+  if ("pname" in body) {
+    parts.push(`pname = '${body["pname"]}'`);
   }
   if ("lastwater" in body) {
     parts.push(`lastwater = NOW()`);
@@ -109,14 +115,14 @@ function makePatchSql(body, id) {
   return sql;
 }
 
-//working
+//CHECK IF WORKING WITH USERID
 router.delete("/:id", ensureUserLoggedIn, async (req, res) => {
   let id = req.params.id;
   try {
-    let result = await db(`SELECT * FROM plantinfo WHERE  id = ${id}`);
+    let result = await db(`SELECT * FROM plantinfo WHERE  id = ${id} and userid = ${req.userId};`);
 
     if (result.data.length === 1) {
-      await db(`DELETE FROM plantinfo WHERE id = ${id}`);
+      await db(`DELETE FROM plantinfo WHERE id = ${id} and userid = ${req.userId};`);
       result = await db("SELECT * FROM plantinfo");
       res.send(result.data);
     } else {
