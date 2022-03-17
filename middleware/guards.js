@@ -16,9 +16,16 @@ function ensureUserLoggedIn(req, res, next) {
 
     try {
         // Throws error on invalid/missing token
-        jwt.verify(token, SECRET_KEY);
-        // If we get here, a valid token was passed
-        next();
+        jwt.verify(token, SECRET_KEY, async function (err, decoded) {
+            //if its not a valid token send another error
+            if (err) res.status(401).send({ message: err.message });
+            else {
+              //if its all good, send the protected data
+              req.userId = decoded.userId;
+              next();
+            }
+          });
+      
     } catch (err) {
         res.status(401).send({ error: 'Unauthorized' });
     }

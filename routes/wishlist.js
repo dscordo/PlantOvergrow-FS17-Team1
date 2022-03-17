@@ -6,7 +6,7 @@ const { ensureUserLoggedIn } = require("../middleware/guards");
 //working
 router.get("/", ensureUserLoggedIn, async (req, res) => {
   try {
-    let results = await db("SELECT * FROM wishlist ORDER BY id ASC;");
+    let results = await db(`SELECT * FROM wishlist WHERE userid = ${req.userId}  ORDER BY id ASC;`);
 
     res.send(results.data);
   } catch (err) {
@@ -17,7 +17,7 @@ router.get("/", ensureUserLoggedIn, async (req, res) => {
 router.get("/:id", ensureUserLoggedIn, async (req, res, next) => {
   let id = req.params.id;
   try {
-    let result = await db(`SELECT * FROM wishlist WHERE  id = ${id}`);
+    let result = await db(`SELECT * FROM wishlist WHERE  id = ${id} and userid = ${req.userId}`);
     if (result.data.length === 1) {
       res.send(result.data);
     } else {
@@ -27,7 +27,8 @@ router.get("/:id", ensureUserLoggedIn, async (req, res, next) => {
     res.status(404).send({ error: err.message });
   }
 });
-//working
+
+//CHECK IF WORKING WITH USERID
 router.post("/", ensureUserLoggedIn, async (req, res) => {
   let { userid, pid, notes } = req.body;
 
@@ -39,18 +40,18 @@ router.post("/", ensureUserLoggedIn, async (req, res) => {
   try {
     await db(sql);
 
-    let result = await db("SELECT * FROM wishlist");
+    let result = await db(`SELECT * FROM wishlist WHERE userid = ${req.userId};`);
 
     res.send(result.data);
   } catch (err) {
     res.status(500).send({ error: err.message }, "***on catch");
   }
 });
-//working for notes and we don't need anymore.
+//CHECK IF WORKING WITH USERID
 router.patch("/:id", ensureUserLoggedIn, async (req, res) => {
   let id = req.params.id;
   let { notes } = req.body;
-  let sqlCheckID = `SELECT * FROM wishlist WHERE id = ${id}`;
+  let sqlCheckID = `SELECT * FROM wishlist WHERE id = ${id} and userid = ${req.userId}`;
   let sqlUpdate = `UPDATE wishlist SET notes = '${notes}' WHERE id = ${id}`;
 
   try {
@@ -66,14 +67,14 @@ router.patch("/:id", ensureUserLoggedIn, async (req, res) => {
     res.status(500).send({ error: err.message });
   }
 });
-//working
+//CHECK IF WORKING WITH USERID
 router.delete("/:id", ensureUserLoggedIn, async (req, res) => {
   let id = req.params.id;
   try {
-    let result = await db(`SELECT * FROM wishlist WHERE  id = ${id}`);
+    let result = await db(`SELECT * FROM wishlist WHERE  id = ${id} and userid = ${req.userId}`);
 
     if (result.data.length === 1) {
-      await db(`DELETE FROM wishlist WHERE id = ${id}`);
+      await db(`DELETE FROM wishlist WHERE id = ${id} and userid = ${req.userId}`);
       result = await db("SELECT * FROM wishlist");
       res.send(result.data);
     } else {
