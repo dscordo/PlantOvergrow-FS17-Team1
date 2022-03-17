@@ -1,29 +1,37 @@
 import React, { useEffect, useState } from "react";
 import AuthApi from "../helpers/AuthApi";
 import { Link } from "react-router-dom";
-import { DateTime } from "luxon";
-
-//import MyPlantDetail from "./MyPlantDetail";
+import { DateTime, Interval } from "luxon";
 
 function MyPlantsView(props) {
-  const [myPlants, setMyPlants] = useState([]);
-  const [errorMsg, setErrorMsg] = useState("");
-
-  //--------------
+  //--------------LUXON PLAYGROUND----------------
   let dt = DateTime.local(2017, 5, 15, 8, 30);
   let try1 = DateTime.fromISO("2016-05-25T09:08:34.123");
   let now = DateTime.now();
   let try4 = DateTime.local();
-  let try3 = DateTime.fromISO(myPlants.lastwater);
-  let try5 = DateTime.now().toString;
-  //console.log("estos son", try1.c, try2.c, try3.c);
+
+  let try5 = DateTime.now().toString();
+  let x = Interval.fromDateTimes(dt, DateTime.now());
+  let y = Interval.fromDateTimes(dt, DateTime.now()).toDuration(["days"]);
+
+  //console.log(now, "now");
+  //console.log(try5, "now.tostring");
+
+  //console.log(x, "x");
+  //console.log(y.values.days, "y");
+  //console.log(Math.floor(y.values.days), "y floored");
+
+  //console.log("estos son", try1.c, try2.c);
 
   //console.log("this is myPlants[0]", myPlants[0]);
   //console.log("this is datetime_full", now.DATETIME_FULL);
   //console.log("this is year", now.year);
   //console.log("this is toISO", now.year);
 
-  //-------------
+  //----------------------
+
+  const [myPlants, setMyPlants] = useState([]);
+  const [errorMsg, setErrorMsg] = useState("");
   useEffect(() => {
     showMyPlants();
   }, []);
@@ -32,7 +40,6 @@ function MyPlantsView(props) {
     let response = await AuthApi.getContent("/plantinfo");
     if (response.ok) {
       setMyPlants(response.data);
-      //console.log("this is myPlants[0].lastwater", response.data[0].lastwater);
       setErrorMsg("");
     } else {
       setMyPlants([]);

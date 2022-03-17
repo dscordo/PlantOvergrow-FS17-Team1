@@ -6,7 +6,9 @@ const { ensureUserLoggedIn } = require("../middleware/guards");
 //working
 router.get("/", ensureUserLoggedIn, async (req, res) => {
   try {
-    let results = await db(`SELECT * FROM plantinfo WHERE userid = ${req.userId} ORDER BY id ASC;`);
+    let results = await db(
+      `SELECT * FROM plantinfo WHERE userid = ${req.userId} ORDER BY id ASC;`
+    );
 
     res.send(results.data);
   } catch (err) {
@@ -18,7 +20,9 @@ router.get("/", ensureUserLoggedIn, async (req, res) => {
 router.get("/:id", ensureUserLoggedIn, async (req, res, next) => {
   let id = req.params.id;
   try {
-    let result = await db(`SELECT * FROM plantinfo WHERE id = ${id} and userid = ${req.userId};`);
+    let result = await db(
+      `SELECT * FROM plantinfo WHERE id = ${id} and userid = ${req.userId};`
+    );
     if (result.data.length === 1) {
       res.send(result.data);
     } else {
@@ -52,7 +56,9 @@ router.post("/", ensureUserLoggedIn, async (req, res) => {
   try {
     await db(sql);
 
-    let result = await db(`SELECT * FROM plantinfo WHERE userid = ${req.userId} and userid = ${req.userId}`);
+    let result = await db(
+      `SELECT * FROM plantinfo WHERE userid = ${req.userId} and userid = ${req.userId}`
+    );
 
     res.send(result.data);
   } catch (err) {
@@ -64,14 +70,16 @@ router.post("/", ensureUserLoggedIn, async (req, res) => {
 router.patch("/:id", ensureUserLoggedIn, async (req, res) => {
   let { id } = req.params;
   let sql = makePatchSql(req.body, id);
-  let sqlcheck = `SELECT * FROM plantinfo WHERE id = ${id} and userid = ${req.userId}`;
+  let sqlcheck = `SELECT * FROM plantinfo WHERE id = ${id} WHERE userid = ${req.userId}`; //this is broken
   try {
     let result = await db(sqlcheck);
     if (result.data.length === 0) {
-      res.status(404).send({ error: "plant not found!" }); //sending me here after patch
+      res.status(404).send({ error: "plant not found!" });
     } else {
       await db(sql);
-      let result = await db("select * from plantinfo");
+      let result = await db(
+        `select * from plantinfo WHERE id = ${id} WHERE userid = ${req.userId}`
+      );
       res.status(201).send(result.data);
     }
   } catch (err) {
@@ -119,11 +127,17 @@ function makePatchSql(body, id) {
 router.delete("/:id", ensureUserLoggedIn, async (req, res) => {
   let id = req.params.id;
   try {
-    let result = await db(`SELECT * FROM plantinfo WHERE  id = ${id} and userid = ${req.userId};`);
+    let result = await db(
+      `SELECT * FROM plantinfo WHERE  id = ${id} and userid = ${req.userId};`
+    );
 
     if (result.data.length === 1) {
-      await db(`DELETE FROM plantinfo WHERE id = ${id} and userid = ${req.userId};`);
-      result = await db("SELECT * FROM plantinfo");
+      await db(
+        `DELETE FROM plantinfo WHERE id = ${id} and userid = ${req.userId};`
+      );
+      result = await db(
+        `SELECT * FROM plantinfo WHERE  id = ${id} and userid = ${req.userId};`
+      );
       res.send(result.data);
     } else {
       res
