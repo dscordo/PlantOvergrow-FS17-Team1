@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
+import SearchDetailView from "./SearchDetailView";
+
+
 
 
 export default function SearchPlantView() {
     const [plant, setPlant] = useState("")
     const [plantResults, setPlantResults] = useState([])
     const [plantOneResult, setPlantOneResult] = useState([])
+    
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { value} = e.target;
@@ -22,12 +28,14 @@ export default function SearchPlantView() {
 
     async function showResults() {
       console.log("showResults", plant);
-      let response = await fetch(`/externalApi/${plant}`);
+      let response = await fetch(`/externalApi/getPlants/${plant}`);
       if (response.ok) {
         let result = await response.json();
         console.log("SHOW RESULT", typeof result.count);
         if (result.count === 1) {
           setPlantOneResult(result.results);
+          let pid = result.results[0].pid
+          navigate(`/PlantCard/${pid}`)
           console.log("SHOW RESULT ONE", result);
         } else if (result.count > 1){
           setPlantResults(result.results)
@@ -38,31 +46,20 @@ export default function SearchPlantView() {
       }
     }
 
-
-    // async function showResults(plant) {
-    //     console.log("showResults", plant);
-    //     let response = await ExternalApi.getPlants(plant);
-    //     console.log("showResults2", ExternalApi.getPlants(plant));
-    //     if (response.ok) {
-    //       setPlant(response.data);
-    //     } else {
-    //       setPlant(null);
-    //     }
-    // };
-
     return (
-        <div className="plantSearch">
-            SearchPlantView
-            <form onSubmit={(e) => handleSubmit(e)}>
-            <div>
-                <label htmlFor="">
-                    Search plant
-                    <input type="text" name="plantName" value={plant} onChange={handleChange} />
-                </label>
-            </div>
-            <button type="submit">Search Plant</button>
-            </form>
-
+      <div className="plantSearch">
+        SearchPlantView
+        <form onSubmit={(e) => handleSubmit(e)}>
+          <div>
+            <label htmlFor="">
+              Search plant
+              <input type="text" name="plantName" value={plant} onChange={handleChange} />
+            </label>
+          </div>
+          <button type="submit">Search Plant</button>
+        </form>
+    
+        <SearchDetailView plantResults={plantResults}/>
         </div>
     );
 }

@@ -8,8 +8,9 @@ const getPlants = async (plantName) => {
     plantName.replace(/\s/g, "%20");
     let url = `https://open.plantbook.io/api/v1/plant/search?alias=${plantName}`;
     try {
+        console.log("url", url);
         let response = await axios.get(url, {
-            headers: { Authorization: "Bearer fh1AYN9SDf2t7PqGV7BJazyeG3xnSV" },
+          headers: { Authorization: "Bearer b40QWDzGKBNGeKz38vbKuiysMcHb9y" },
         });
     console.log("IM HERE inside try", response.data);
     // let result = await response.json();
@@ -20,7 +21,7 @@ const getPlants = async (plantName) => {
     }
 };
 
-router.get("/:plant", async function (req, res) {
+router.get("/getPlants/:plant", async function (req, res) {
     console.log("REQ params", req.params.plant);
     let result = await getPlants(req.params.plant);
     console.log("IM HERE INSE THE ENDPOINT", result);
@@ -33,7 +34,7 @@ const getPlantDetail = async (pid) => {
     let url = `https://open.plantbook.io/api/v1/plant/detail/${pid}/`;
     try {
         let response = await axios.get(url, {
-            headers: { Authorization: "Bearer fh1AYN9SDf2t7PqGV7BJazyeG3xnSV" },
+          headers: { Authorization: "Bearer b40QWDzGKBNGeKz38vbKuiysMcHb9y" },
         });
     // console.log("IM HERE inside try", response.data);
     // let result = await response.json();
@@ -44,11 +45,11 @@ const getPlantDetail = async (pid) => {
     }
 };
 
-router.get("/:pid", async function (req, res) {
-    console.log("REQ params", req.params.pid);
-    let result = await getPlantDetail(req.params.pid);
-    console.log("IM HERE INSE THE ENDPOINT", result);
-    res.send(result);
+router.get("/getPlantDetail/:pid", async function (req, res) {
+  console.log("REQ params", req.params.pid);
+  let result = await getPlantDetail(req.params.pid);
+  console.log("IM HERE INSE THE ENDPOINT", result);
+  res.send(result);
 });
 
 module.exports = router;
