@@ -20,6 +20,7 @@ import Wishlist from "./views/Wishlist";
 import SearchPlantView from "./views/SearchPlantView";
 import SearchDetailView from "./views/SearchDetailView";
 import PlantCard from "./views/PlantCard";
+import AddPlant from "./views/AddPlant";
 
 function App() {
   const [user, setUser] = useState(Local.getUser());
@@ -81,7 +82,7 @@ function App() {
             }
           />
           <Route
-            path="/plantinfo/:id/:pid"
+            path="/plantinfo/:id"
             element={
               <PrivateRoute>
                 <MyPlantDetail />
@@ -93,6 +94,14 @@ function App() {
             element={
               <PrivateRoute>
                 <Wishlist />
+              </PrivateRoute>
+            }
+          />
+           <Route
+            path="/addplant"
+            element={
+              <PrivateRoute>
+                <AddPlant />
               </PrivateRoute>
             }
           />

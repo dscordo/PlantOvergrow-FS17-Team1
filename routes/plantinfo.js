@@ -49,15 +49,15 @@ router.post("/", ensureUserLoggedIn, async (req, res) => {
   } = req.body;
 
   let sql = `
-  INSERT INTO plantinfo ( pid, pname, lastwater, lastfert, lastrepot, wfreq, fertfreq, notes, userimage, startdate) 
-  VALUES ('${pid}','${pname}','${lastwater}','${lastfert}','${lastrepot}','${wfreq}','${fertfreq}','${notes}','${userimage}','${startdate}');
+  INSERT INTO plantinfo ( userid, pid, pname, lastwater, lastfert, lastrepot, wfreq, fertfreq, notes, userimage, startdate) 
+  VALUES ('${req.userId}','${pid}','${pname}','${lastwater}','${lastfert}','${lastrepot}','${wfreq}','${fertfreq}','${notes}','${userimage}','${startdate}');
 `;
 
   try {
     await db(sql);
 
     let result = await db(
-      `SELECT * FROM plantinfo WHERE userid = ${req.userId} and userid = ${req.userId}`
+      `SELECT * FROM plantinfo WHERE userid = ${req.userId}`
     );
 
     res.send(result.data);
@@ -70,7 +70,7 @@ router.post("/", ensureUserLoggedIn, async (req, res) => {
 router.patch("/:id", ensureUserLoggedIn, async (req, res) => {
   let { id } = req.params;
   let sql = makePatchSql(req.body, id);
-  let sqlcheck = `SELECT * FROM plantinfo WHERE id = ${id} WHERE userid = ${req.userId}`; //this is broken
+  let sqlcheck = `SELECT * FROM plantinfo WHERE id = ${id} AND userid = ${req.userId}`; 
   try {
     let result = await db(sqlcheck);
     if (result.data.length === 0) {
@@ -78,7 +78,7 @@ router.patch("/:id", ensureUserLoggedIn, async (req, res) => {
     } else {
       await db(sql);
       let result = await db(
-        `select * from plantinfo WHERE id = ${id} WHERE userid = ${req.userId}`
+        `select * from plantinfo WHERE id = ${id} AND userid = ${req.userId}`
       );
       res.status(201).send(result.data);
     }

@@ -9,7 +9,7 @@ export default function MyPlantDetail(props) {
   const [errorMsg, setErrorMsg] = useState("");
   const [editNotes, setEditNotes] = useState(false);
   const [patchPlant, setPatchPlant] = useState({});
-  let { id, pid } = useParams();
+  let { id } = useParams();
 
   useEffect(() => {
     showPlantDetail();

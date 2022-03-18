@@ -64,12 +64,8 @@ function MyPlantsView(props) {
             <div className="col my-3" key={p.id}>
               <div className="card text-center h-100">
                 <div className="card-body">
-                  {/* <img
-                    className="card-img-top"
-                    src={`https://image.tmdb.org/t/p/original${film.poster_path}`}
-                  /> */}
-
-                  <h5 className="card-title">{p.pid}</h5>
+                
+                  <h5 className="card-title">{p.name}</h5>
                   <p className="card-body">{p.notes}</p>
                   <span className="badge rounded-pill bg-light text-dark">
                     {DateTime.fromISO(p.lastwater).toLocaleString()}
@@ -80,7 +76,7 @@ function MyPlantsView(props) {
                   <span className="badge rounded-pill bg-light text-dark">
                     {DateTime.fromISO(p.lastrepot).toLocaleString()}
                   </span>
-                  <Link to={`/plantinfo/${p.id}/${p.pid}`}>here</Link>
+                  <Link to={`/plantinfo/${p.id}`}>here</Link>
                 </div>
               </div>
             </div>
