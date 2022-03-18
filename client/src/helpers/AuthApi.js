@@ -133,7 +133,6 @@ class AuthApi {
         // Prepare URL and options
         let url = route;
         let options = { method: 'GET', headers: {} };
-
         // Add JWT token (if it exists) in case content is protected
         let token = Local.getToken();
         if (token) {
