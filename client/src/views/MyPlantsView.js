@@ -65,7 +65,7 @@ function MyPlantsView(props) {
               <div className="card text-center h-100">
                 <div className="card-body">
                 
-                  <h5 className="card-title">{p.name}</h5>
+                  <h5 className="card-title">{p.pname}</h5>
                   <p className="card-body">{p.notes}</p>
                   <span className="badge rounded-pill bg-light text-dark">
                     {DateTime.fromISO(p.lastwater).toLocaleString()}
