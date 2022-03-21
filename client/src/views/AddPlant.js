@@ -17,9 +17,9 @@ function AddPlant() {
         startdate: "",
       });
 
-    useEffect(() => {
-        addPlant()
-    }, []);
+    // useEffect(() => {
+    //     addPlant()
+    // }, []);
 
     const handleChange = event => {
         setInput((state) => ({...state, [event.target.name]: event.target.value}));
@@ -65,7 +65,7 @@ function AddPlant() {
     <div className='AddPlant'>
         <h2>Add New Plant</h2>
         <div className='container'>
-        <form onSubmit={e => handleSubmit(e)} className="row g-3">
+        <form onSubmit={(e) => handleSubmit(e)} className="row g-3">
         <div className="col-md-10">
         <div className="input-group">
             <span className="input-group-text">Plant name</span>
