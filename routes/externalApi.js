@@ -10,7 +10,7 @@ const getPlants = async (plantName) => {
     try {
         console.log("url", url);
         let response = await axios.get(url, {
-          headers: { Authorization: "Bearer b40QWDzGKBNGeKz38vbKuiysMcHb9y" },
+          headers: { Authorization: "Bearer EvqjaXcyOB7w40HF8vhREIb8IYO7we" },
         });
     console.log("IM HERE inside try", response.data);
     // let result = await response.json();
@@ -34,7 +34,7 @@ const getPlantDetail = async (pid) => {
     let url = `https://open.plantbook.io/api/v1/plant/detail/${pid}/`;
     try {
         let response = await axios.get(url, {
-          headers: { Authorization: "Bearer b40QWDzGKBNGeKz38vbKuiysMcHb9y" },
+          headers: { Authorization: "Bearer EvqjaXcyOB7w40HF8vhREIb8IYO7we" },
         });
     // console.log("IM HERE inside try", response.data);
     // let result = await response.json();
