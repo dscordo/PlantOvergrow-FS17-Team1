@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Local from '../helpers/Local';
+import { useNavigate } from "react-router-dom";
 
-
-function AddPlant() {
+function AddPlant(props) {
+  let navigate = useNavigate();
     
     const [input, setInput] = useState({ 
         pid: "",
@@ -17,9 +18,11 @@ function AddPlant() {
         startdate: "",
       });
 
-    // useEffect(() => {
-    //     addPlant()
-    // }, []);
+      useEffect(() => {
+        setInput((state) => ({...state, pid: props.pid}));
+       
+      }, [])
+      
 
     const handleChange = event => {
         setInput((state) => ({...state, [event.target.name]: event.target.value}));
@@ -51,7 +54,7 @@ function AddPlant() {
           if (response.ok) {
             let data = await response.json();
             console.log("post worked", data);
-            //useNavigate hook to go to MyPlantsView
+            navigate("/plantinfo", { replace: true });
           } else {
             console.log("server error:", response.statusText);
           }

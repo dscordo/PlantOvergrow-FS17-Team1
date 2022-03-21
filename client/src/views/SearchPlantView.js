@@ -48,7 +48,7 @@ export default function SearchPlantView() {
 
     return (
       <div className="plantSearch">
-        SearchPlantView
+        <h3>Search Plants</h3>
         <form onSubmit={(e) => handleSubmit(e)}>
           <div>
             <label htmlFor="">
@@ -56,7 +56,7 @@ export default function SearchPlantView() {
               <input type="text" name="plantName" value={plant} onChange={handleChange} />
             </label>
           </div>
-          <button type="submit">Search Plant</button>
+          <button type="submit" className="btn btn-outline-success">Search Plant</button>
         </form>
     
         <SearchDetailView plantResults={plantResults}/>
