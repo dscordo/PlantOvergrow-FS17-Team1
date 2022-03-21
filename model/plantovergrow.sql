@@ -42,11 +42,15 @@ CREATE TABLE `wishlist`(
 
 
 
-INSERT INTO `users`(`id`, `name`, `email`, `password`) VALUES (1000, "Maria", "maria@gmail.com", "$2b$12$eFzMWbS9SogNtxkmo3J7aO8FQMFQSKbtpwLMIOVsF6GGKpTQdgq.W");
- 
-INSERT INTO `plantinfo`(`id`, `userid`, `pid`, `pname`, `lastwater`, `lastfert`, `lastrepot`, `wfreq`, `fertfreq`, `notes`, `userimage`, `startdate`) 
-VALUES (111, 1000, "cocos nucifera", "cocoloco", "2022-03-03", "2022-02-02", "2020-08-08", "1", "30", "coco coquito coquero", "coco.jpg", "2018-10-10"),
- (112, 1000, "anguloa uniflora", "Lola la orquidea", "2022-03-12", "2021-02-02", "2018-08-08", "2", "60", "orquidea azul", "orquidea.jpg", "2017-01-10");
+/* INSERT INTO `users`(`id`, `name`, `email`, `password`) VALUES (1, "Maria", "maria@gmail.com", "$2b$12$eFzMWbS9SogNtxkmo3J7aO8FQMFQSKbtpwLMIOVsF6GGKpTQdgq.W");
+  */
 
-INSERT INTO `wishlist`(`id`, `userid`, `pid`, `notes`) VALUES (222, 1000, "alocasia cucullata", "oreja de elefante enano encapuchado");
+
+/* INSERT INTO `plantinfo`(`id`, `userid`, `pid`, `pname`, `lastwater`, `lastfert`, `lastrepot`, `wfreq`, `fertfreq`, `notes`, `userimage`, `startdate`) 
+VALUES (1, 1, "cocos nucifera", "cocoloco", "2022-03-03", "2022-02-02", "2020-08-08", "1", "30", "coco coquito coquero", "coco.jpg", "2018-10-10"),
+ (2, 1, "anguloa uniflora", "Lola la orquidea", "2022-03-12", "2021-02-02", "2018-08-08", "2", "60", "orquidea azul", "orquidea.jpg", "2017-01-10");
+(3, 1, "burgundy phalaenopsis", "Borgoña Madroña", "2022-03-12", "2021-02-02", "2018-08-08", "2", "60", "muy buenas tardes", "borgoña.jpg", "2017-01-10");
+ */
+/* INSERT INTO `wishlist`(`id`, `userid`, `pid`, `notes`) 
+VALUES (1, 1, "perico palotes", "pues muy bien por aquí"); */
 
