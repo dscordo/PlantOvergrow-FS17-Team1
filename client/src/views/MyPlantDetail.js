@@ -91,7 +91,7 @@ export default function MyPlantDetail(props) {
       <div className="Wrapper">
         {plantDetail.map((p) => (
           <div className="Container" key={p.id}>
-            <h3>{p.pid}</h3>
+            <h3>{p.pname}</h3>
             {editNotes ? (
               <div className="input-group">
                 <input
@@ -137,7 +137,7 @@ export default function MyPlantDetail(props) {
                 <form>
                   <button
                     type="button"
-                    className="btn btn-success"
+                    className="btn btn-outline-success"
                     name="lastwater"
                     onClick={(e) => doPatch(p.id, { lastwater: "pitipum" })}
                   >
@@ -183,7 +183,7 @@ export default function MyPlantDetail(props) {
                 <form>
                   <button
                     type="button"
-                    className="btn btn-success"
+                    className="btn btn-outline-success"
                     name="lastfert"
                     onClick={(e) => doPatch(p.id, { lastfert: "pitipum" })}
                   >
@@ -229,7 +229,7 @@ export default function MyPlantDetail(props) {
                 <form>
                   <button
                     type="button"
-                    className="btn btn-success"
+                    className="btn btn-outline-success"
                     name="lastrepot"
                     onClick={(e) => doPatch(p.id, { lastrepot: "pitipum" })}
                   >
