@@ -30,11 +30,11 @@ router.get("/:id", ensureUserLoggedIn, async (req, res, next) => {
 
 //CHECK IF WORKING WITH USERID
 router.post("/", ensureUserLoggedIn, async (req, res) => {
-  let { userid, pid, notes } = req.body;
+  let { pid, image_url } = req.body;
 
   let sql = `
-  INSERT INTO wishlist (userid, pid, notes) 
-  VALUES ('${userid}','${pid}','${notes}');
+  INSERT INTO wishlist (userid, pid, image_url) 
+  VALUES ('${req.userId}','${pid}','${image_url}');
 `;
 
   try {
@@ -47,6 +47,7 @@ router.post("/", ensureUserLoggedIn, async (req, res) => {
     res.status(500).send({ error: err.message }, "***on catch");
   }
 });
+
 //CHECK IF WORKING WITH USERID
 router.patch("/:id", ensureUserLoggedIn, async (req, res) => {
   let id = req.params.id;
@@ -67,6 +68,7 @@ router.patch("/:id", ensureUserLoggedIn, async (req, res) => {
     res.status(500).send({ error: err.message });
   }
 });
+
 //CHECK IF WORKING WITH USERID
 router.delete("/:id", ensureUserLoggedIn, async (req, res) => {
   let id = req.params.id;
@@ -86,4 +88,5 @@ router.delete("/:id", ensureUserLoggedIn, async (req, res) => {
     res.status(500).send("catch error on delete", { error: err.message });
   }
 });
+
 module.exports = router;
