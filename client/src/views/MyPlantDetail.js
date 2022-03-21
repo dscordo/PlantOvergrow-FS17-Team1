@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import Local from "../helpers/Local";
 import { DateTime, Interval } from "luxon";
 
-export default function MyPlantDetail(props) {
+export default function MyPlantDetail() {
   const [plantDetail, setPlantDetail] = useState([]);
   const [errorMsg, setErrorMsg] = useState("");
   const [editNotes, setEditNotes] = useState(false);
