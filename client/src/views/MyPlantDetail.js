@@ -66,6 +66,26 @@ export default function MyPlantDetail(props) {
     }
   }
 
+  function waterStatus(a, b) {
+    if (a < b) {
+      return "green";
+    } else if (a >= b && a < 2 * b) {
+      return "yellow";
+    } else {
+      return "brown";
+    }
+  }
+
+  function fertStatus(a, b) {
+    if (a < b) {
+      return "green";
+    } else if (a >= b && a < 2 * b) {
+      return "yellow";
+    } else {
+      return "brown";
+    }
+  }
+
   return (
     <div className="MyPlantDetail">
       <div className="Wrapper">
@@ -129,6 +149,17 @@ export default function MyPlantDetail(props) {
                         fill="currentColor"
                         className="bi bi-droplet-fill"
                         viewBox="0 0 16 16"
+                        style={{
+                          color: waterStatus(
+                            Math.floor(
+                              Interval.fromDateTimes(
+                                DateTime.fromISO(p.lastwater),
+                                DateTime.now()
+                              ).toDuration(["days"]).values.days
+                            ),
+                            p.wfreq
+                          ),
+                        }}
                       >
                         <path d="M8 16a6 6 0 0 0 6-6c0-1.655-1.122-2.904-2.432-4.362C10.254 4.176 8.75 2.503 8 0c0 0-6 5.686-6 10a6 6 0 0 0 6 6ZM6.646 4.646l.708.708c-.29.29-1.128 1.311-1.907 2.87l-.894-.448c.82-1.641 1.717-2.753 2.093-3.13Z" />
                       </svg>
@@ -164,6 +195,17 @@ export default function MyPlantDetail(props) {
                         fill="currentColor"
                         className="bi bi-plus-circle-fill"
                         viewBox="0 0 16 16"
+                        style={{
+                          color: fertStatus(
+                            Math.floor(
+                              Interval.fromDateTimes(
+                                DateTime.fromISO(p.lastfert),
+                                DateTime.now()
+                              ).toDuration(["days"]).values.days
+                            ),
+                            p.fertfreq
+                          ),
+                        }}
                       >
                         <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
                       </svg>
