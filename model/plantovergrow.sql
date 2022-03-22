@@ -35,15 +35,12 @@ CREATE TABLE `wishlist`(
     `id` INT NOT NULL AUTO_INCREMENT,
     `userid` INT NOT NULL,
     `pid` VARCHAR(100) NOT NULL,
+    `image_url` VARCHAR(255),
     `notes` VARCHAR(255) NULL,
     PRIMARY KEY (id,userid),
     FOREIGN KEY (userid) REFERENCES users(id)
 );
 
-
-
-/* INSERT INTO `users`(`id`, `name`, `email`, `password`) VALUES (1, "Maria", "maria@gmail.com", "$2b$12$eFzMWbS9SogNtxkmo3J7aO8FQMFQSKbtpwLMIOVsF6GGKpTQdgq.W");
-  */
 
 
 /* INSERT INTO `plantinfo`(`id`, `userid`, `pid`, `pname`, `lastwater`, `lastfert`, `lastrepot`, `wfreq`, `fertfreq`, `notes`, `userimage`, `startdate`) 
