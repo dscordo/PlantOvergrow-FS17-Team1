@@ -83,16 +83,17 @@ function MyPlantsView(props) {
             <div className="col my-3" key={p.id}>
               <div className="card text-center h-100">
                 <div className="card-body">
-                  <h5 className="card-title">
-                    {" "}
-                    <Link to={`/plantinfo/${p.id}`}>{p.pname}</Link>
-                  </h5>
+                  <Link to={`/plantinfo/${p.id}`}>
+                    <img
+                      className="card-img-top"
+                      src="https://via.placeholder.com/150"
+                      alt="display image"
+                      style={{ width: "300px" }}
+                    />
+                    <h5 className="card-title"> {p.pname}</h5>{" "}
+                  </Link>
                   <table className="table table-success table-borderless table-striped">
                     <tbody>
-                      <tr>
-                        <th scope="row">Notes</th>
-                        <td>{p.notes}</td>
-                      </tr>
                       <tr>
                         <th scope="row">Watering status</th>
                         <td>
@@ -120,13 +121,8 @@ function MyPlantsView(props) {
                                 <path d="M8 16a6 6 0 0 0 6-6c0-1.655-1.122-2.904-2.432-4.362C10.254 4.176 8.75 2.503 8 0c0 0-6 5.686-6 10a6 6 0 0 0 6 6ZM6.646 4.646l.708.708c-.29.29-1.128 1.311-1.907 2.87l-.894-.448c.82-1.641 1.717-2.753 2.093-3.13Z" />
                               </svg>
                             }
-                            {/* {DateTime.fromISO(p.lastwater).toLocaleString()} */}
                           </span>
                         </td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Recommended frequency</th>
-                        <td>every {p.wfreq} days</td>
                       </tr>
                       <tr>
                         <th scope="row">Fert status</th>
@@ -155,7 +151,6 @@ function MyPlantsView(props) {
                                 <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
                               </svg>
                             }
-                            {/* {DateTime.fromISO(p.lastfert).toLocaleString()} */}
                           </span>
                         </td>
                       </tr>
