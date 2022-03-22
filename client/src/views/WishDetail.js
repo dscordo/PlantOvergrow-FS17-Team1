@@ -67,6 +67,9 @@ export default function WishDetail() {
       <div className="Wrapper">
         {plantDetail.map((p) => (
           <div className="Container" key={p.id}>
+            <img className="card-img-top" src={p.image_url} 
+            alt="display image"
+            style={{ width: "300px" }}/>
             <h3>{p.pid}</h3>
             {editNotes ? (
               <div className="input-group">
