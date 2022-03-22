@@ -11,11 +11,10 @@ export default function PlantCard(props) {
   const { pid } = useParams();
   let navigate = useNavigate();
 
-
   useEffect(() => {
     showDetails();
   }, []);
-
+  //this one
   async function showDetails() {
     console.log("showDetails", pid);
     let response = await fetch(`/externalApi/getPlantDetail/${pid}`);
@@ -37,8 +36,9 @@ export default function PlantCard(props) {
       },
       body: JSON.stringify({
         pid: pid,
-        image_url: plantDetail.image_url
-    })};
+        image_url: plantDetail.image_url,
+      }),
+    };
 
     let token = Local.getToken();
     if (token) {
@@ -58,6 +58,16 @@ export default function PlantCard(props) {
       console.log("network error:", e.message);
     }
   }
+  //light
+  function lightIcon(x) {
+    if (x < 2500) {
+      return "shade";
+    } else if (x >= 2500 && x < 7000) {
+      return "indirect sun";
+    } else {
+      return "sun";
+    }
+  }
 
   return (
     <div className="PlantCard">
@@ -69,11 +79,23 @@ export default function PlantCard(props) {
           alt="display image"
           style={{ width: "300px" }}
         ></img>
-
-        <p>{plantDetail.max_light_mmol}</p>
+        <h5>{plantDetail.display_pid}</h5>
         <ul>
-          <li>Max. temp is: {plantDetail.max_temp}</li>
-          <li>Min. temp is: {plantDetail.min_temp}</li>
+          <li>
+            Light: {lightIcon(plantDetail.min_light_lux)}-
+            {lightIcon(plantDetail.max_light_lux)}
+          </li>
+          <li>
+            Temp in C: {plantDetail.min_temp}º-{plantDetail.max_temp}º
+          </li>
+          <li>
+            Air Humidity: {plantDetail.min_env_humid}%-
+            {plantDetail.max_env_humid}%
+          </li>
+          <li>
+            Soil Moisture: {plantDetail.min_soil_moist}%-
+            {plantDetail.max_soil_moist}%
+          </li>
         </ul>
         <div className="button-wrapper" style={{ padding: "20px" }}>
           {props.user ? (
