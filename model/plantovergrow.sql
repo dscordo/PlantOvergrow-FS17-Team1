@@ -43,10 +43,13 @@ CREATE TABLE `wishlist`(
 
 
 
+<<<<<<< HEAD
 /* INSERT INTO `users`(`id`, `name`, `email`, `password`) VALUES (1, "Maria", "maria@gmail.com", "$2b$12$eFzMWbS9SogNtxkmo3J7aO8FQMFQSKbtpwLMIOVsF6GGKpTQdgq.W");
   */
 
 
+=======
+>>>>>>> origin
 /* INSERT INTO `plantinfo`(`id`, `userid`, `pid`, `pname`, `lastwater`, `lastfert`, `lastrepot`, `wfreq`, `fertfreq`, `notes`, `userimage`, `startdate`) 
 VALUES (1, 1, "cocos nucifera", "cocoloco", "2022-03-03", "2022-02-02", "2020-08-08", "1", "30", "coco coquito coquero", "coco.jpg", "2018-10-10"),
  (2, 1, "anguloa uniflora", "Lola la orquidea", "2022-03-12", "2021-02-02", "2018-08-08", "2", "60", "orquidea azul", "orquidea.jpg", "2017-01-10");
