@@ -90,40 +90,23 @@ export default function MyPlantDetail() {
     <div className="MyPlantDetail">
       <div className="Wrapper">
         {plantDetail.map((p) => (
-          <div className="Container" key={p.id}>
+          <div className="container" key={p.id}>
+            <div className="row" style={{ paddingBottom: "20px" }}>
             <h3>{p.pname}</h3>
-            {editNotes ? (
-              <div className="input-group">
-                <input
-                  type="text"
-                  name="notes"
-                  value={patchPlant.notes}
-                  onChange={handleChange}
-                />
-                <button
-                  type="submit"
-                  className="btn btn-success"
-                  onClick={() => handleSubmit(patchPlant)} //maybe empty this out.
-                >
-                  Save
-                </button>
-              </div>
-            ) : (
-              <div>
-                <p>{p.notes}</p>
-                <button
-                  type="button"
-                  className="btn btn-success"
-                  onClick={() => setEditNotes(true)}
-                >
-                  Edit notes
-                </button>
-              </div>
-            )}
-            <ul>
-              <li>Recommended frequency: every {p.wfreq} days</li>
-              <li>
-                Last watered:{" "}
+            </div>
+            <div className="row row-cols-sm-1 row-cols-md-2">
+            <div className="col-md-6">
+            <img className="card-img-top" src="https://via.placeholder.com/150"
+                      alt="display image"
+                      style={{ width: "300px" }}/>
+                      </div>
+              <div className="col-md-6">
+              <table className="table table-success table-borderless table-striped">
+                  <tbody> 
+              <tr>
+              <th scope="row" width="33%">
+                Last watered</th>
+                <td width="33%">
                 {Math.floor(
                   Interval.fromDateTimes(
                     DateTime.fromISO(p.lastwater),
@@ -131,9 +114,8 @@ export default function MyPlantDetail() {
                   ).toDuration(["days"]).values.days
                 )}{" "}
                 days ago
-              </li>
-
-              <li>
+                </td>
+                    <td width="33%">
                 <form>
                   <button
                     type="button"
@@ -166,10 +148,17 @@ export default function MyPlantDetail() {
                     }
                   </button>
                 </form>
-              </li>
-              <li>Recommended frequency: every {p.fertfreq} days</li>
-              <li>
-                Last fertilized:{" "}
+                </td>
+              </tr>
+              <tr>
+                    <th scope="row" colspan="2">Recommended frequency </th> 
+                    <td colspan="1">every {p.wfreq} days</td>
+              </tr>
+              <tr>
+              <th scope="row">
+                Last fertilized
+                </th>
+                <td>
                 {Math.floor(
                   Interval.fromDateTimes(
                     DateTime.fromISO(p.lastfert),
@@ -177,9 +166,9 @@ export default function MyPlantDetail() {
                   ).toDuration(["days"]).values.days
                 )}{" "}
                 days ago
-              </li>
-              <li>
-                {" "}
+               </td>
+              
+              <td>
                 <form>
                   <button
                     type="button"
@@ -212,20 +201,26 @@ export default function MyPlantDetail() {
                     }
                   </button>
                 </form>
-              </li>
-              <li>
-                Last repotted:{" "}
-                {Math.floor(
+                </td>
+                </tr>
+                <tr>
+              <th scope="row" colspan="2">Recommended frequency</th>
+              <td> every {p.fertfreq} days</td>
+              </tr>
+              <tr>
+              <th scope="row">
+                Last repotted
+                </th>
+              <td>
+              {Math.floor(
                   Interval.fromDateTimes(
                     DateTime.fromISO(p.lastrepot),
                     DateTime.now()
                   ).toDuration(["days"]).values.days
                 )}{" "}
                 days ago
-              </li>
-
-              <li>
-                {" "}
+                </td>
+                <td>
                 <form>
                   <button
                     type="button"
@@ -254,10 +249,62 @@ export default function MyPlantDetail() {
                     }
                   </button>
                 </form>
-              </li>
-            </ul>
+                </td>
+                </tr>
+             <tr>
+             <th scope="row">Notes</th>
+             <td colspan="2">
+            {editNotes ? (
+              <td colspan="2">
+              <div className="input-group">
+                <input
+                  type="text"
+                  name="notes"
+                  value={patchPlant.notes}
+                  onChange={handleChange}
+                />
+                <button
+                  type="submit"
+                  className="btn btn-success"
+                  onClick={() => handleSubmit(patchPlant)} //maybe empty this out.
+                >
+                  Save
+                </button>
+              </div>
+              </td>
+            ) : (
+              <div>
+                <table class="table mb-0">
+                  <tbody>
+                    <tr>
+                  <td>
+                {p.notes}
+                </td>
+                </tr>
+                <tr>
+                <td>
+                <button
+                  type="button"
+                  className="btn btn-success text-nowrap"
+                  onClick={() => setEditNotes(true)}
+                >
+                  Edit notes
+                </button>
+                </td>
+                </tr>
+                </tbody>
+                </table>
+              </div>
+            )}
+            </td>
+            </tr>
+            </tbody>
+           </table>
+          </div>
+          </div>
           </div>
         ))}
+        
       </div>
     </div>
   );
