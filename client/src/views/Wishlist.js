@@ -71,7 +71,44 @@ function Wishlist(props) {
     } else {
       return "sun";
     }
-  }
+  };
+
+  // const handleChange = (e) => {
+  //   const { value } = e.target;
+
+  //   setNotes(value);
+  //   console.log(e.target.value, "value");
+  // };
+
+  // async function changeNote() {
+  //   let options = {
+  //     method: "PATCH",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({
+  //       notes: notes.notes,
+  //     }),
+  //   };
+
+  //   let token = Local.getToken();
+  //   if (token) {
+  //     options.headers["Authorization"] = "Bearer " + token;
+  //   }
+
+  //   try {
+  //     let response = await fetch(`/wishlist`, options);
+  //     if (response.ok) {
+  //       let data = await response.json();
+  //       console.log("post worked", data);
+  //       navigate("/Wishlist", { replace: true });
+  //     } else {
+  //       console.log("server error:", response.statusText);
+  //     }
+  //   } catch (e) {
+  //     console.log("network error:", e.message);
+  //   }
+  // }
 
   return (
     <div className="Wishlist">

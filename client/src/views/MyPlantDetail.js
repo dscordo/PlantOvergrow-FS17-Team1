@@ -19,6 +19,10 @@ export default function MyPlantDetail() {
     showPlantDetail();
   }, []);
 
+  useEffect(() => {
+    showApiDetail(plantDetail.pid); 
+  }, [plantDetail]);
+
   async function showPlantDetail() {
     let response = await AuthApi.getContent(`/plantinfo/${id}`);
     if (response.ok) {
@@ -28,8 +32,9 @@ export default function MyPlantDetail() {
       setPlantDetail();
       setErrorMsg(response.error);
     }
-    // showApiDetail(response.data.pid); untested
-  }
+    // console.log("pid", response.data.pid);
+    // showApiDetail(response.data.pid); //untested
+  };
 
   const handleChange = (e) => {
     setPatchPlant({ [e.target.name]: e.target.value });
@@ -69,7 +74,7 @@ export default function MyPlantDetail() {
     } catch (e) {
       console.log("network error:", e.message);
     }
-  }
+  };
 
   function waterStatus(a, b) {
     if (a < b) {
@@ -79,7 +84,7 @@ export default function MyPlantDetail() {
     } else {
       return "brown";
     }
-  }
+  };
 
   function fertStatus(a, b) {
     if (a < b) {
@@ -89,7 +94,7 @@ export default function MyPlantDetail() {
     } else {
       return "brown";
     }
-  }
+  };
 
   async function showApiDetail(pid) {
     let response = await ExternalApi.showDetails(pid);
@@ -98,7 +103,7 @@ export default function MyPlantDetail() {
     } else {
       setApiDetail(null);
     }
-  }
+  };
 
   /* } */
   function displayImage(image) {
@@ -109,11 +114,12 @@ export default function MyPlantDetail() {
     } else {
       return "http://localhost:5001/images/" + image;
     }
-  }
+  };
 
   return (
     <div className="MyPlantDetail">
       <div className="Wrapper">
+        <p>{apiDetail.pid}</p>
         {plantDetail.map((p) => (
           <div className="container" key={p.id}>
             <div className="row" style={{ paddingBottom: "20px" }}>
@@ -128,7 +134,6 @@ export default function MyPlantDetail() {
                   style={{ width: "300px" }}
                 />
               </div>
-
               <div className="col-md-6">
                 <table className="table table-success table-borderless table-striped">
                   <tbody>
@@ -199,7 +204,6 @@ export default function MyPlantDetail() {
                         )}{" "}
                         days ago
                       </td>
-
                       <td>
                         <form>
                           <button
@@ -341,4 +345,4 @@ export default function MyPlantDetail() {
       </div>
     </div>
   );
-}
+};
