@@ -28,6 +28,8 @@ function App() {
   const [loginErrorMsg, setLoginErrorMsg] = useState("");
   const navigate = useNavigate();
   const [regErrorMsg, setRegErrorMsg] = useState("");
+  const [plantDetail, setPlantDetail] = useState([]);
+
 
   async function doLogin(username, password) {
     let response = await AuthApi.loginUser(username, password);
@@ -57,6 +59,7 @@ function App() {
       setRegErrorMsg("Register failed");
     }
   }
+
 
   return (
     <div className="App">
@@ -129,7 +132,12 @@ function App() {
           />
           <Route path="/SearchPlant" element={<SearchPlantView />} />
           <Route path="/SearchView" element={<SearchDetailView />} />
-          <Route path="/PlantCard/:pid" element={<PlantCard user={user} />}  />
+          <Route
+            path="/PlantCard/:pid"
+            element={
+              <PlantCard user={user} />
+            }
+          />
           <Route
             path="*"
             element={<ErrorView code="404" text="Page not found" />}
