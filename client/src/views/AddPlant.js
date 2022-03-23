@@ -19,12 +19,16 @@ function AddPlant(props) {
     wfreq: "7",
     fertfreq: "30",
     notes: "",
-    // userimage: "",
+    userimage: "",
     startdate: today,
   });
 
   useEffect(() => {
-    setInput((state) => ({ ...state, pid: props.pid }));
+    setInput((state) => ({
+      ...state,
+      pid: props.pid,
+      userimage: props.userimage,
+    }));
   }, []);
 
   const handleChange = (event) => {
@@ -48,7 +52,6 @@ function AddPlant(props) {
       });
     } else {
       formData.append("file", file, file.name);
-      //append the file to the object to be sent
       Object.keys(input).forEach((key) => {
         formData.append(key, input[key]);
       });
@@ -58,7 +61,6 @@ function AddPlant(props) {
     addPlant(formData);
   };
 
-  // POST to plantinfo - NEED TO ADD PROPS SO EXT API IS CONNECTED
   async function addPlant(formData) {
     let options = {
       method: "POST",
@@ -72,20 +74,19 @@ function AddPlant(props) {
     }
 
     try {
-      let response = await fetch(`/plantinfo`, options); //it should show even with empty fields
+      let response = await fetch(`/plantinfo`, options);
       if (response.ok) {
         let data = await response.json();
         console.log("post worked", data);
         navigate("/plantinfo", { replace: true });
       } else {
-        console.log("server error:", response.statusText); //error aqui si no está completo
+        console.log("server error:", response.statusText);
       }
     } catch (e) {
       console.log("network error:", e.message);
     }
   }
 
-  // POST to wishlist?
   return (
     <div className="AddPlant">
       <h2>Add New Plant</h2>
@@ -206,7 +207,7 @@ function AddPlant(props) {
                 type="text"
                 onChange={(e) => handleChange(e)}
               ></textarea>
-              <label for="notes" className="col-sm-2 col-form-label">
+              <label htmlFor="notes" className="col-sm-2 col-form-label">
                 Notes
               </label>
             </div>
@@ -217,12 +218,9 @@ function AddPlant(props) {
               <input
                 type="file"
                 className="form-control"
-                // id="userimage"
-                // name="userimage"
-                // value={input.userimage}
                 onChange={handleFileChange}
               />
-              <label className="input-group-text" for="userimage">
+              <label className="input-group-text" htmlFor="userimage">
                 Add an image
               </label>
             </div>

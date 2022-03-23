@@ -15,6 +15,9 @@ function Wishlist(props) {
   const [apiDetail, setApiDetail] = useState([]);
   let mergedStates = [];
 
+  const [pid, setPid] = useState(""); //these are for sending info to addplant
+  const [image, setImage] = useState("");
+
   useEffect(() => {
     showWishlist();
   }, []);
@@ -77,7 +80,7 @@ function Wishlist(props) {
     <div className="Wishlist">
       <div className="container">
         <h1>Wishlist</h1>
-        {addplant && <AddPlant pid={myWishlist.pid} />}
+        {addplant && <AddPlant pid={pid} userimage={image} />}
         {!completeInfo.length ? (
           <div className="row row-cols-md-3 g-20">
             {myWishlist.map((p) => (
@@ -93,9 +96,7 @@ function Wishlist(props) {
                         type="button"
                         className="btn btn-outline-success"
                         onClick={() => setAddPlant(true)}
-                      >
-                        Add to my plants
-                      </button>
+                      ></button>
                     </div>
                   </div>
                 </div>
@@ -136,7 +137,11 @@ function Wishlist(props) {
                       <button
                         type="button"
                         className="btn btn-outline-success"
-                        onClick={() => setAddPlant(true)}
+                        onClick={() => {
+                          setAddPlant(true);
+                          setPid(p.pid);
+                          setImage(p.image_url);
+                        }}
                       >
                         Add to my plants
                       </button>

@@ -4,31 +4,6 @@ import { Link } from "react-router-dom";
 import { DateTime, Interval } from "luxon";
 
 function MyPlantsView(props) {
-  //--------------LUXON PLAYGROUND----------------
-  /* let dt = DateTime.local(2022, 3, 20, 8, 30);
-  let wCurrentInterval = Math.floor(
-    Interval.fromDateTimes(DateTime.fromISO(dt), DateTime.now()).toDuration([
-      "days",
-    ]).values.days
-  );
-  let fakeWFreq = 5;
-  let x = DateTime.now()
-    .toLocaleString({
-      locale: "en-gb",
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-    })
-    .replaceAll("/", "-");
-
-  let y = `${DateTime.now().c.day}-${DateTime.now().c.month.toLocaleString({
-    month: "2-digit",
-  })}-${DateTime.now().c.year}`;
-
-  let z = DateTime.now().toFormat("yyyy-MM-dd"); */
-
-  //console.log(z);
-  //----------------------
   function waterStatus(a, b) {
     if (a < b) {
       return "green";
@@ -73,11 +48,6 @@ function MyPlantsView(props) {
   if (!myPlants) {
     return <h2>Loading...</h2>;
   }
-  /*
-if p.userimage doesn't exists - src=placeholder URL
-if p.userimage starts with "http" - src=p.userimage only
-if p.userimage does not start with http -   src={'http://localhost:5001/images/' + p.userimage}
-*/
 
   function displayImage(image) {
     if (!image || image === "undefined") {
@@ -105,8 +75,11 @@ if p.userimage does not start with http -   src={'http://localhost:5001/images/'
                       alt="display image"
                       style={{ width: "300px" }}
                     />
-                    <h5 className="card-title"> {p.pname}</h5>{" "}
                   </Link>
+                  <h5 className="card-title">
+                    {p.pname}
+                    {p.pid != "undefined" ? ", " + p.pid : ""}
+                  </h5>
                   <table className="table table-success table-borderless table-striped">
                     <tbody>
                       <tr>

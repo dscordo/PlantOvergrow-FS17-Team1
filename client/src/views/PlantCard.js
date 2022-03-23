@@ -14,13 +14,12 @@ export default function PlantCard(props) {
   useEffect(() => {
     showDetails();
   }, []);
-  //this one
+
   async function showDetails() {
     console.log("showDetails", pid);
     let response = await fetch(`/externalApi/getPlantDetail/${pid}`);
     if (response.ok) {
       let result = await response.json();
-      // console.log("SHOW RESULT", typeof result.count)
       setPlantDetail(result);
     } else {
       setPlantDetail(null);
@@ -72,8 +71,6 @@ export default function PlantCard(props) {
   return (
     <div className="PlantCard">
       <div className="container">
-        <h3> {plantDetail.display_pid} </h3>
-
         <img
           src={plantDetail.image_url}
           alt="display image"
@@ -131,7 +128,7 @@ export default function PlantCard(props) {
             </Link>
           )}
         </div>
-        {addplant && <AddPlant pid={pid} />}
+        {addplant && <AddPlant pid={pid} userimage={plantDetail.image_url} />}
       </div>
     </div>
   );
