@@ -8,12 +8,11 @@ function NavBar(props) {
       style={{ backgroundColor: "green" }}
     >
       <div className="container-fluid">
+      <NavLink className="nav-link" to="/">
         <span className="navbar-brand font-weight-bold">
-          <NavLink className="nav-link" to="/">
             Plant Overgrow
-          </NavLink>
         </span>
-
+        </NavLink>
         <button
           className="navbar-toggler"
           type="button"
