@@ -3,7 +3,6 @@ import AuthApi from "../helpers/AuthApi";
 import { Link } from "react-router-dom";
 import { DateTime, Interval } from "luxon";
 
-
 function MyPlantsView(props) {
   //--------------LUXON PLAYGROUND----------------
   /* let dt = DateTime.local(2022, 3, 20, 8, 30);
@@ -74,23 +73,21 @@ function MyPlantsView(props) {
   if (!myPlants) {
     return <h2>Loading...</h2>;
   }
-/*
+  /*
 if p.userimage doesn't exists - src=placeholder URL
 if p.userimage starts with "http" - src=p.userimage only
 if p.userimage does not start with http -   src={'http://localhost:5001/images/' + p.userimage}
 */
 
-function displayImage(image) {
-if (!image) {
-return "https://images.unsplash.com/photo-1587334274328-64186a80aeee?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzZ8fHBsYW50fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60";
-}
-else if(image.startsWith("http")) {
-return image;
-} else {
-  return 'http://localhost:5001/images/' + image;
-}
-}
-
+  function displayImage(image) {
+    if (!image || image === "undefined") {
+      return "https://images.unsplash.com/photo-1587334274328-64186a80aeee?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzZ8fHBsYW50fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60";
+    } else if (image.startsWith("http")) {
+      return image;
+    } else {
+      return "http://localhost:5001/images/" + image;
+    }
+  }
 
   return (
     <div className="MyPlants">

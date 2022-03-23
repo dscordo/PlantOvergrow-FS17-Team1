@@ -102,7 +102,7 @@ export default function MyPlantDetail() {
 
   /* } */
   function displayImage(image) {
-    if (!image) {
+    if (!image || image === "undefined") {
       return "https://images.unsplash.com/photo-1587334274328-64186a80aeee?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzZ8fHBsYW50fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60";
     } else if (image.startsWith("http")) {
       return image;

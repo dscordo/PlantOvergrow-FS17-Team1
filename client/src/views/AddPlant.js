@@ -42,12 +42,18 @@ function AddPlant(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData();
-    //need to make it so that we can add without file too
-    formData.append("file", file, file.name);
-    //append the file to the object to be sent
-    Object.keys(input).forEach((key) => {
-      formData.append(key, input[key]);
-    });
+    if (!file) {
+      Object.keys(input).forEach((key) => {
+        formData.append(key, input[key]);
+      });
+    } else {
+      formData.append("file", file, file.name);
+      //append the file to the object to be sent
+      Object.keys(input).forEach((key) => {
+        formData.append(key, input[key]);
+      });
+    }
+
     console.log("this is formdata", formData);
     addPlant(formData);
   };
