@@ -47,8 +47,14 @@ body {
  .container {
   background-color: #89b09e;
   padding: 2%;
+  border-radius: 25px;
  }
 
  h1, h2, h3 {
    color: #374e4c;
  }
+
+ a:link {
+  color: #374e4c;
+  text-decoration: none;
+}
