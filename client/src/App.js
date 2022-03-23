@@ -21,7 +21,7 @@ import SearchPlantView from "./views/SearchPlantView";
 import SearchDetailView from "./views/SearchDetailView";
 import PlantCard from "./views/PlantCard";
 import AddPlant from "./views/AddPlant";
-import WishDetail from "./views/WishDetail";
+//import WishDetail from "./views/WishDetail";
 
 function App() {
   const [user, setUser] = useState(Local.getUser());
@@ -29,7 +29,6 @@ function App() {
   const navigate = useNavigate();
   const [regErrorMsg, setRegErrorMsg] = useState("");
   const [plantDetail, setPlantDetail] = useState([]);
-
 
   async function doLogin(username, password) {
     let response = await AuthApi.loginUser(username, password);
@@ -59,7 +58,6 @@ function App() {
       setRegErrorMsg("Register failed");
     }
   }
-
 
   return (
     <div className="App">
@@ -101,14 +99,14 @@ function App() {
               </PrivateRoute>
             }
           />
-          <Route
+          {/* <Route
             path="/wishlist/:id"
             element={
               <PrivateRoute>
                 <WishDetail />
               </PrivateRoute>
             }
-          />
+          /> */}
           <Route
             path="/addplant"
             element={
