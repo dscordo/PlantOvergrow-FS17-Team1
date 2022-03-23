@@ -85,7 +85,16 @@ export default function MyPlantDetail() {
       return "brown";
     }
   }
-
+  function displayImage(image) {
+    if (!image) {
+    return "https://images.unsplash.com/photo-1587334274328-64186a80aeee?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzZ8fHBsYW50fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60";
+    }
+    else if(image.startsWith("http")) {
+    return image;
+    } else {
+      return 'http://localhost:5001/images/' + image;
+    }
+    }
   return (
     <div className="MyPlantDetail">
       <div className="Wrapper">
@@ -96,7 +105,7 @@ export default function MyPlantDetail() {
             </div>
             <div className="row row-cols-sm-1 row-cols-md-2">
             <div className="col-md-6">
-            <img className="card-img-top" src="https://via.placeholder.com/150"
+            <img className="card-img-top" src={displayImage(p.userimage)}
                       alt="display image"
                       style={{ width: "300px" }}/>
                       </div>
