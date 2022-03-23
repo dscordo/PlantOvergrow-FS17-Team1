@@ -96,7 +96,7 @@ return image;
     <div className="MyPlants">
       <div className="container">
         <h1>My Plants</h1>
-        <div className="row row-cols-md-3 g-20">
+        <div className="row row-cols-lg-3 g-20">
           {myPlants.map((p) => (
             <div className="col my-3" key={p.id}>
               <div className="card text-center h-100">
