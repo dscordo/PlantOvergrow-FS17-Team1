@@ -15,7 +15,7 @@ import ErrorView from "./views/ErrorView";
 import MyPlantsView from "./views/MyPlantsView";
 import MyPlantDetail from "./views/MyPlantDetail";
 import ProfileView from "./views/ProfileView";
-import UsersView from "./views/UsersView";
+//import UsersView from "./views/UsersView";
 import Wishlist from "./views/Wishlist";
 import SearchPlantView from "./views/SearchPlantView";
 import SearchDetailView from "./views/SearchDetailView";
@@ -64,8 +64,8 @@ function App() {
 
       <div className="container">
         <Routes>
-          <Route path="/" element={<h1>Home</h1>} />
-          <Route path="/users" element={<UsersView />} />
+          {/* <Route path="/" element={<h1>Home</h1>} /> */}
+          {/* <Route path="/users" element={<UsersView />} /> */}
           <Route
             path="/users/:userId"
             element={
@@ -127,9 +127,9 @@ function App() {
             path="/register"
             element={<RegisterView registerCb={(uo) => doRegister(uo)} />}
           />
-          <Route path="/SearchPlant" element={<SearchPlantView />} />
+          <Route path="/" element={<SearchPlantView />} />
           <Route path="/SearchView" element={<SearchDetailView />} />
-          <Route path="/PlantCard/:pid" element={<PlantCard user={user} />}  />
+          <Route path="/PlantCard/:pid" element={<PlantCard user={user} />} />
           <Route
             path="*"
             element={<ErrorView code="404" text="Page not found" />}
