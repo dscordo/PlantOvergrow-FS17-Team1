@@ -5,7 +5,7 @@ function NavBar(props) {
   return (
     <nav
       className="Navbar navbar navbar-expand-sm navbar-dark mb-4"
-      style={{ backgroundColor: "green" }}
+      style={{ backgroundColor: "#374e4c" }}
     >
       <div className="container-fluid">
       <NavLink className="nav-link" to="/">
