@@ -6,14 +6,12 @@ import AuthApi from "../helpers/AuthApi";
 import Local from "../helpers/Local";
 import ExternalApi from "../helpers/ExternalApi";
 
-
 export default function MyPlantDetail() {
   const [plantDetail, setPlantDetail] = useState([]);
   const [errorMsg, setErrorMsg] = useState("");
   const [editNotes, setEditNotes] = useState(false);
   const [patchPlant, setPatchPlant] = useState({});
   const [apiDetail, setApiDetail] = useState([]);
-
 
   let { id } = useParams();
 
@@ -71,7 +69,7 @@ export default function MyPlantDetail() {
     } catch (e) {
       console.log("network error:", e.message);
     }
-  };
+  }
 
   function waterStatus(a, b) {
     if (a < b) {
@@ -81,7 +79,7 @@ export default function MyPlantDetail() {
     } else {
       return "brown";
     }
-  };
+  }
 
   function fertStatus(a, b) {
     if (a < b) {
@@ -91,8 +89,7 @@ export default function MyPlantDetail() {
     } else {
       return "brown";
     }
-
-  };
+  }
 
   async function showApiDetail(pid) {
     let response = await ExternalApi.showDetails(pid);
@@ -101,20 +98,18 @@ export default function MyPlantDetail() {
     } else {
       setApiDetail(null);
     }
-  };
-
-
   }
+
+  /* } */
   function displayImage(image) {
     if (!image) {
-    return "https://images.unsplash.com/photo-1587334274328-64186a80aeee?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzZ8fHBsYW50fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60";
-    }
-    else if(image.startsWith("http")) {
-    return image;
+      return "https://images.unsplash.com/photo-1587334274328-64186a80aeee?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzZ8fHBsYW50fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60";
+    } else if (image.startsWith("http")) {
+      return image;
     } else {
-      return 'http://localhost:5001/images/' + image;
+      return "http://localhost:5001/images/" + image;
     }
-    }
+  }
 
   return (
     <div className="MyPlantDetail">
@@ -125,19 +120,15 @@ export default function MyPlantDetail() {
               <h3>{p.pname}</h3>
             </div>
             <div className="row row-cols-sm-1 row-cols-md-2">
-            <div className="col-md-6">
-            <img className="card-img-top" src={displayImage(p.userimage)}
-                      alt="display image"
-                      style={{ width: "300px" }}/>
-                      </div>
               <div className="col-md-6">
                 <img
                   className="card-img-top"
-                  src="https://via.placeholder.com/150"
+                  src={displayImage(p.userimage)}
                   alt="display image"
                   style={{ width: "300px" }}
                 />
               </div>
+
               <div className="col-md-6">
                 <table className="table table-success table-borderless table-striped">
                   <tbody>
