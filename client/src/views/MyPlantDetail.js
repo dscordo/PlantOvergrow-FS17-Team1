@@ -12,10 +12,10 @@ export default function MyPlantDetail() {
   const [errorMsg, setErrorMsg] = useState("");
   const [editNotes, setEditNotes] = useState(false);
   const [patchPlant, setPatchPlant] = useState({});
-  
-  let { id } = useParams();
+  const [apiDetail, setApiDetail] = useState([]);
 
-  
+
+  let { id } = useParams();
 
   useEffect(() => {
     showPlantDetail();
@@ -30,6 +30,7 @@ export default function MyPlantDetail() {
       setPlantDetail();
       setErrorMsg(response.error);
     }
+    // showApiDetail(response.data.pid); untested
   }
 
   const handleChange = (e) => {
@@ -70,7 +71,7 @@ export default function MyPlantDetail() {
     } catch (e) {
       console.log("network error:", e.message);
     }
-  }
+  };
 
   function waterStatus(a, b) {
     if (a < b) {
@@ -80,7 +81,7 @@ export default function MyPlantDetail() {
     } else {
       return "brown";
     }
-  }
+  };
 
   function fertStatus(a, b) {
     if (a < b) {
@@ -90,7 +91,16 @@ export default function MyPlantDetail() {
     } else {
       return "brown";
     }
-  }
+  };
+
+  async function showApiDetail(pid) {
+    let response = await ExternalApi.showDetails(pid);
+    if (response.ok) {
+      setApiDetail(response.data);
+    } else {
+      setApiDetail(null);
+    }
+  };
 
   return (
     <div className="MyPlantDetail">
@@ -99,7 +109,6 @@ export default function MyPlantDetail() {
           <div className="container" key={p.id}>
             <div className="row" style={{ paddingBottom: "20px" }}>
               <h3>{p.pname}</h3>
-              
             </div>
             <div className="row row-cols-sm-1 row-cols-md-2">
               <div className="col-md-6">
