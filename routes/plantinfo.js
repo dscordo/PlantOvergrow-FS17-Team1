@@ -2,6 +2,8 @@ var express = require("express");
 var router = express.Router();
 const db = require("../model/helper");
 const { ensureUserLoggedIn } = require("../middleware/guards");
+const fs = require('fs/promises');
+const path = require('path');
 
 //working
 router.get("/", ensureUserLoggedIn, async (req, res) => {
@@ -33,8 +35,10 @@ router.get("/:id", ensureUserLoggedIn, async (req, res, next) => {
   }
 });
 
-//CHECK IF WORKING WITH USERID
+//POST - CHECK IF WORKING WITH FILE UPLOAD
 router.post("/", ensureUserLoggedIn, async (req, res) => {
+
+  // if req.file - do this
   let {
     pid,
     pname,
@@ -44,16 +48,31 @@ router.post("/", ensureUserLoggedIn, async (req, res) => {
     wfreq,
     fertfreq,
     notes,
-    userimage,
     startdate,
   } = req.body;
 
+  let image;
+  if(req.files) {
+  let { file } = req.files;  
+
+    // Determine from/to paths for moving file to someplace permanent
+    let fromPath = file.tempFilePath;
+    let toPath = path.join(__dirname, '../public/images/') + file.name;
+    await fs.rename(fromPath, toPath);
+    image = file.name;
+  } else {
+    image = req.body.userimage;
+  }
+  
   let sql = `
   INSERT INTO plantinfo ( userid, pid, pname, lastwater, lastfert, lastrepot, wfreq, fertfreq, notes, userimage, startdate) 
-  VALUES ('${req.userId}','${pid}','${pname}','${lastwater}','${lastfert}','${lastrepot}','${wfreq}','${fertfreq}','${notes}','${userimage}','${startdate}');
+  VALUES ('${req.userId}','${pid}','${pname}','${lastwater}','${lastfert}','${lastrepot}','${wfreq}','${fertfreq}','${notes}','${image}','${startdate}');
 `;
 
   try {
+
+    // await fs.rename(fromPath, toPath);
+
     await db(sql);
 
     let result = await db(

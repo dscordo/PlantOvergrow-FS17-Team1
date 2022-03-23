@@ -4,6 +4,7 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const cors = require("cors");
+var fileUpload = require('express-fileupload');
 
 var authRouter = require('./routes/auth');
 var plantInfoRouter = require('./routes/plantinfo');
@@ -19,8 +20,20 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
+// app.use(express.static(path.join(__dirname, "public")));
 app.use(cors());
+
+// Init express-fileupload and tell it where to temporarily store uploaded files
+app.use(
+    fileUpload({
+        useTempFiles: true,
+        tempFileDir: '/tmp/'
+    })
+);
+
+// Tell Express to serve all public files from the server's 'public' folder
+// This does NOT get included in the URL
+app.use( express.static('public') );
 
 app.use('/', authRouter); 
 app.use('/plantinfo', plantInfoRouter); 
