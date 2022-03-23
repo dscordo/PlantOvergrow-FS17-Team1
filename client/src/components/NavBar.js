@@ -8,10 +8,8 @@ function NavBar(props) {
       style={{ backgroundColor: "green" }}
     >
       <div className="container-fluid">
-      <NavLink className="nav-link" to="/">
-        <span className="navbar-brand font-weight-bold">
-            Plant Overgrow
-        </span>
+        <NavLink className="nav-link" to="/">
+          <span className="navbar-brand font-weight-bold">Plant Overgrow</span>
         </NavLink>
         <button
           className="navbar-toggler"
@@ -28,19 +26,6 @@ function NavBar(props) {
         {/* Left-aligned stuff */}
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
-            {/*  <li className="nav-item">
-                            <NavLink className="nav-link" to="/">Home</NavLink>
-                        </li> */}
-            {/* <li className="nav-item">
-              <NavLink className="nav-link" to="/">
-                Home
-              </NavLink>
-            </li> */}
-            {/* <li className="nav-item">
-              <NavLink className="nav-link" to="/users">
-                Users
-              </NavLink>
-            </li> */}
             {props.user && (
               <li className="nav-item">
                 <NavLink className="nav-link" to="/plantinfo">
