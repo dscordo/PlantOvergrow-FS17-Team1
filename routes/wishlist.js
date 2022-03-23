@@ -61,7 +61,7 @@ router.patch("/:id", ensureUserLoggedIn, async (req, res) => {
       res.status(404).send({ error: "plant not found!" });
     } else {
       await db(sqlUpdate);
-      let result = await db("SELECT * FROM wishlist");
+      let result = await db(`SELECT * FROM wishlist WHERE id = ${id}`);
       res.status(201).send(result.data);
     }
   } catch (err) {

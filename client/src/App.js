@@ -28,6 +28,8 @@ function App() {
   const [loginErrorMsg, setLoginErrorMsg] = useState("");
   const navigate = useNavigate();
   const [regErrorMsg, setRegErrorMsg] = useState("");
+  const [plantDetail, setPlantDetail] = useState([]);
+
 
   async function doLogin(username, password) {
     let response = await AuthApi.loginUser(username, password);
@@ -57,6 +59,7 @@ function App() {
       setRegErrorMsg("Register failed");
     }
   }
+
 
   return (
     <div className="App">
