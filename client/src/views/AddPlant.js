@@ -6,6 +6,7 @@ import { DateTime, Interval } from "luxon";
 function AddPlant(props) {
   let navigate = useNavigate();
   let today = DateTime.now().toFormat("yyyy-MM-dd");
+  const [file, setFile] = useState(null);
 
   const [input, setInput] = useState({
     pid: "",
@@ -16,7 +17,7 @@ function AddPlant(props) {
     wfreq: "7",
     fertfreq: "30",
     notes: "",
-    userimage: "",
+    // userimage: "",
     startdate: today,
   });
 
@@ -31,19 +32,30 @@ function AddPlant(props) {
     }));
   };
 
+  function handleFileChange(event) {
+    setFile(event.target.files[0]);
+    console.log(file);
+}
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    addPlant();
+    const formData = new FormData();
+    formData.append("file", file, file.name);
+    //append the file to the object to be sent
+    Object.keys(input).forEach((key) => {
+      formData.append(key, input[key]);
+    });
+    console.log("this is formdata", formData);
+    addPlant(formData);
   };
 
   // POST to plantinfo - NEED TO ADD PROPS SO EXT API IS CONNECTED
-  async function addPlant() {
+  async function addPlant(formData) {
     let options = {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(input),
+       },
+      body: formData
     };
 
     let token = Local.getToken();
@@ -197,9 +209,10 @@ function AddPlant(props) {
               <input
                 type="file"
                 className="form-control"
-                id="userimage"
-                name="userimage"
-                value={input.userimage}
+                // id="userimage"
+                // name="userimage"
+                // value={input.userimage}
+                onChange={handleFileChange}
               />
               <label className="input-group-text" for="userimage">
                 Add an image

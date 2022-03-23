@@ -53,13 +53,13 @@ router.post("/", ensureUserLoggedIn, async (req, res) => {
 
   let image;
   if(req.files) {
-  let { myfile } = req.files;  
+  let { file } = req.files;  
 
     // Determine from/to paths for moving file to someplace permanent
-    let fromPath = myfile.tempFilePath;
-    let toPath = path.join(__dirname, '../public/myfiles/') + myfile.name;
+    let fromPath = file.tempFilePath;
+    let toPath = path.join(__dirname, '../public/images/') + file.name;
     await fs.rename(fromPath, toPath);
-    image = myfile.name;
+    image = file.name;
   } else {
     image = req.body.userimage;
   }
