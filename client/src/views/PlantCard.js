@@ -81,18 +81,18 @@ export default function PlantCard(props) {
         ></img>
         <h5>{plantDetail.display_pid}</h5>
         <ul>
-          <li>
+          <li className="list-group-item list-group-item-success">
             Light: {lightIcon(plantDetail.min_light_lux)}-
             {lightIcon(plantDetail.max_light_lux)}
           </li>
-          <li>
+          <li className="list-group-item list-group-item-success">
             Temp in C: {plantDetail.min_temp}º-{plantDetail.max_temp}º
           </li>
-          <li>
+          <li className="list-group-item list-group-item-success">
             Air Humidity: {plantDetail.min_env_humid}%-
             {plantDetail.max_env_humid}%
           </li>
-          <li>
+          <li className="list-group-item list-group-item-success">
             Soil Moisture: {plantDetail.min_soil_moist}%-
             {plantDetail.max_soil_moist}%
           </li>
