@@ -125,7 +125,6 @@ export default function PlantCard(props) {
             </Link>
           )}
           {props.user ? (
-            <Link to="/wishlist/">
               <button
                 type="button"
                 className="btn btn-success"
@@ -133,7 +132,6 @@ export default function PlantCard(props) {
               >
                 Add to wishlist
               </button>
-            </Link>
           ) : (
             <Link to="/login">
               <button type="button" className="btn btn-success">
