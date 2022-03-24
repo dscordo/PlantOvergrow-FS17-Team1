@@ -171,14 +171,16 @@ function Wishlist(props) {
             {completeInfo.map((p) => (
               <div className="col my-3" key={p.id}>
                 <div className="card text-center h-100">
-                  <div className="card-body">
+
                     <button
                       type="button"
                       className="btn-close"
                       aria-label="Close"
                       onClick={() => deleteTask(p.id)}
+                      data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
                     ></button>
-
+                    
+                    <div className="card-body">
                     <img className="card-img-top" src={p.image_url} />
 
                     <h5 className="card-title">{p.display_pid}</h5>
