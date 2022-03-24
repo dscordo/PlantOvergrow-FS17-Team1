@@ -58,7 +58,7 @@ export default function SearchPlantView() {
         <div className="col-md-6">
         <h3>Search Plants</h3>
         <form onSubmit={(e) => handleSubmit(e)}>
-          <div className="input-group col-md-6" style={{ margin: "10px" }}>
+          <div className="input-group col-md-6" style={{ margin: "10px", paddingRight: "15px" }}>
               <input type="text" name="plantName" className="form-control" placeholder="Type to search..." value={plant} onChange={handleChange} />
           <button type="submit" className="btn btn-success">Search Plant</button>
           </div>
