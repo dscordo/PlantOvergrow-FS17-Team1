@@ -52,9 +52,18 @@ body {
 
  h1, h2, h3 {
    color: #374e4c;
+   font-family: 'Pacifico', cursive;
  }
 
  a:link {
   color: #374e4c;
   text-decoration: none;
+}
+
+.navbar {
+  font-family: 'Pacifico', cursive;
+  font-size: large;
+  font-weight: bold;
+  background-color: #374e4c;
+  opacity: 0.9;
 }
