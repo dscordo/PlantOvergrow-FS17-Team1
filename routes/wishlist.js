@@ -72,6 +72,7 @@ router.patch("/:id", ensureUserLoggedIn, async (req, res) => {
 //CHECK IF WORKING WITH USERID
 router.delete("/:id", ensureUserLoggedIn, async (req, res) => {
   let id = req.params.id;
+  console.log("ID!!!!", id);
   try {
     let result = await db(`SELECT * FROM wishlist WHERE  id = ${id} and userid = ${req.userId}`);
 

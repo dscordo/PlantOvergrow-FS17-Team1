@@ -76,6 +76,32 @@ function Wishlist(props) {
     }
   };
 
+
+  const deleteTask = async (id) => {
+    let options = {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    };
+    try {
+      let response = await AuthApi.alterContent(`/wishlist/${id}`, options);
+      console.log(response);
+      if (response.ok) {
+        setWishlist(response.data);
+      } else {
+        console.log(`Server error: ${response.status} ${response.statusText}`);
+      }
+    } catch (err) {
+      console.log(`Server error: ${err.message}`);
+    }
+  };
+
+
+
+
+
+
+
+
   // const handleChange = (e) => {
   //   const { value } = e.target;
 
@@ -146,6 +172,13 @@ function Wishlist(props) {
               <div className="col my-3" key={p.id}>
                 <div className="card text-center h-100">
                   <div className="card-body">
+                    <button
+                      type="button"
+                      className="btn-close"
+                      aria-label="Close"
+                      onClick={() => deleteTask(p.id)}
+                    ></button>
+
                     <img className="card-img-top" src={p.image_url} />
 
                     <h5 className="card-title">{p.display_pid}</h5>
