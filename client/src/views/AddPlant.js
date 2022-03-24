@@ -4,7 +4,7 @@ import { DateTime, Interval } from "luxon";
 
 import Local from "../helpers/Local";
 import ExternalApi from "../helpers/ExternalApi";
-import "./AddPlant.css";
+
 
 function AddPlant(props) {
   let navigate = useNavigate();
@@ -92,8 +92,8 @@ function AddPlant(props) {
     <div className="AddPlant">
       <h2>Add New Plant</h2>
       <div className="container">
-      <div className="form-center">
-        <form onSubmit={(e) => handleSubmit(e)} className="row g-3 align-self-center">
+      <div className="form-center px-3 mx-3">
+        <form onSubmit={(e) => handleSubmit(e)} className="row g-3">
           <div className="col-md-12">
             <div className="input-group mb-3">
               <span className="input-group-text">Plant name</span>
@@ -103,13 +103,14 @@ function AddPlant(props) {
                 type="text"
                 value={input.pname}
                 onChange={(e) => handleChange(e)}
+                placeholder="Scientific name, your personal name for it.. whatever you want"
               ></input>
             </div>
           </div>
           <div className="col-md-6">
             <div className="input-group">
-              <label className="input-group-text" htmlFor="fertfreq">
-                Recommended watering
+              <label className="input-group-text">
+                It wants water
               </label>
               <select
                 className="form-select"
@@ -128,7 +129,7 @@ function AddPlant(props) {
           </div>
           <div className="col-md-6">
             <div className="input-group">
-              <span className="input-group-text">Last time it was watered</span>
+              <span className="input-group-text">I watered it on</span>
               <input
                 className="form-control"
                 name="lastwater"
@@ -140,8 +141,8 @@ function AddPlant(props) {
           </div>
           <div className="col-md-6">
             <div className="input-group">
-              <label className="input-group-text" htmlFor="fertfreq">
-                Recommended fertilizing
+              <label className="input-group-text">
+                It wants fertilizing
               </label>
               <select
                 className="form-select"
@@ -161,7 +162,7 @@ function AddPlant(props) {
           <div className="col-md-6">
             <div className="input-group">
               <span className="input-group-text">
-                Last time it was fertilized
+                I fertilized it on
               </span>
               <input
                 className="form-control"
@@ -187,7 +188,7 @@ function AddPlant(props) {
           <div className="col-md-6">
             <div className="input-group">
               <span className="input-group-text">
-                Last time it was repotted
+                I repotted it on
               </span>
               <input
                 className="form-control"
@@ -227,7 +228,7 @@ function AddPlant(props) {
               </label>
             </div>
           </div>
-          <div className="col-9">
+          <div className="col-12">
             <button className="btn btn-success" type="submit">
               Submit
             </button>
