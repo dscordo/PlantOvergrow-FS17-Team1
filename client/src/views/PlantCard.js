@@ -134,7 +134,7 @@ export default function PlantCard(props) {
            </div>
         </div>
         <div className="row align-items-center">
-        <div className="align-self-center" style={{ width: "100%", margin: "auto"}}>
+        <div className="align-self-center" style={{ width: "100%", margin: "auto", paddingRight: "10px"}}>
         {addplant && <AddPlant pid={pid} userimage={plantDetail.image_url} />}
         </div>
         </div>
