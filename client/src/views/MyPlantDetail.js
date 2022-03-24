@@ -11,7 +11,7 @@ export default function MyPlantDetail() {
   const [errorMsg, setErrorMsg] = useState("");
   const [editNotes, setEditNotes] = useState(false);
   const [patchPlant, setPatchPlant] = useState({});
-  const [apiDetail, setApiDetail] = useState([]);
+  const [apiDetail, setApiDetail] = useState();
 
   let { id } = useParams();
 
@@ -20,7 +20,11 @@ export default function MyPlantDetail() {
   }, []);
 
   useEffect(() => {
-    showApiDetail(plantDetail.pid); 
+    if (plantDetail.length) {
+      showApiDetail(plantDetail[0].pid); 
+      console.log("plantDetail", plantDetail);
+    }
+  
   }, [plantDetail]);
 
   async function showPlantDetail() {
@@ -97,9 +101,12 @@ export default function MyPlantDetail() {
   };
 
   async function showApiDetail(pid) {
+    console.log("pid", pid);
+    console.log("we are here");
     let response = await ExternalApi.showDetails(pid);
-    if (response.ok) {
-      setApiDetail(response.data);
+    console.log("response", response);
+    if (response) {
+      setApiDetail(response);
     } else {
       setApiDetail(null);
     }
@@ -119,7 +126,8 @@ export default function MyPlantDetail() {
   return (
     <div className="MyPlantDetail">
       <div className="Wrapper">
-        <p>{apiDetail.pid}</p>
+        {apiDetail && 
+        <p>{apiDetail.pid}</p>}
         {plantDetail.map((p) => (
           <div className="container" key={p.id}>
             <div className="row" style={{ paddingBottom: "20px" }}>
@@ -188,10 +196,10 @@ export default function MyPlantDetail() {
                       </td>
                     </tr>
                     <tr>
-                      <th scope="row" colspan="2">
+                      <th scope="row" colSpan="2">
                         Recommended frequency{" "}
                       </th>
-                      <td colspan="1">every {p.wfreq} days</td>
+                      <td colSpan="1">every {p.wfreq} days</td>
                     </tr>
                     <tr>
                       <th scope="row">Last fertilized</th>
@@ -242,7 +250,7 @@ export default function MyPlantDetail() {
                       </td>
                     </tr>
                     <tr>
-                      <th scope="row" colspan="2">
+                      <th scope="row" colSpan="2">
                         Recommended frequency
                       </th>
                       <td> every {p.fertfreq} days</td>
@@ -293,9 +301,9 @@ export default function MyPlantDetail() {
                     </tr>
                     <tr>
                       <th scope="row">Notes</th>
-                      <td colspan="2">
+                      <td colSpan="2">
                         {editNotes ? (
-                          <td colspan="2">
+                          <td colSpan="2">
                             <div className="input-group">
                               <input
                                 type="text"
@@ -314,7 +322,7 @@ export default function MyPlantDetail() {
                           </td>
                         ) : (
                           <div>
-                            <table class="table mb-0">
+                            <table className="table mb-0">
                               <tbody>
                                 <tr>
                                   <td>{p.notes}</td>
