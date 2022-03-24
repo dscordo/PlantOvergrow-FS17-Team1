@@ -48,13 +48,24 @@ body {
   background-color: #89b09e;
   padding: 2%;
   border-radius: 25px;
+  margin: auto;
  }
 
  h1, h2, h3 {
    color: #374e4c;
+   font-family: 'Belleza', sans-serif;
  }
 
  a:link {
   color: #374e4c;
   text-decoration: none;
 }
+
+.navbar {
+  font-family: 'Belleza', sans-serif;
+  font-size: large;
+  font-weight: bold;
+  background-color: #374e4c;
+  opacity: 0.9;
+}
+

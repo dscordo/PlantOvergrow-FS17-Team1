@@ -1,0 +1,19 @@
+.button {
+    margin: 10px;
+    float: left;
+}
+
+.button-wrapper {
+    padding: 20px;
+}
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+h5 {
+    padding-bottom: 5px;
+}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate, Link } from "react-router-dom";
 import SearchDetailView from "./SearchDetailView";
 
 
@@ -48,18 +48,25 @@ export default function SearchPlantView() {
 
     return (
       <div className="plantSearch">
+        <div className="row row-cols-sm-1 row-cols-md-2">
+        <div className="col-md-6" style={{ padding: "10px" }}>
+        <h2>Welcome to Plant Overgrow!</h2>
+          <p>To get started, use the search bar to find a plant you already have or would like to have and add them to My Plants or Wishlist.</p>
+          <p>In My Plants you can keep track of watering and fertilizing schedules, the last time you repotted, add a photo of your own plant or notes.</p>
+          <p><small><Link to="/login">Login</Link> or <Link to="/register">Register</Link> to add plants.</small></p>
+        </div>
+        <div className="col-md-6">
         <h3>Search Plants</h3>
         <form onSubmit={(e) => handleSubmit(e)}>
-          <div>
-            <label htmlFor="">
-              Search plant
-              <input type="text" name="plantName" value={plant} onChange={handleChange} />
-            </label>
+          <div className="input-group col-md-6" style={{ margin: "10px", paddingRight: "15px" }}>
+              <input type="text" name="plantName" className="form-control" placeholder="Type to search..." value={plant} onChange={handleChange} />
+          <button type="submit" className="btn btn-success">Search Plant</button>
           </div>
-          <button type="submit" className="btn btn-outline-success">Search Plant</button>
         </form>
     
         <SearchDetailView plantResults={plantResults}/>
+        </div>
+        </div>
         </div>
     );
 }
