@@ -103,13 +103,14 @@ function AddPlant(props) {
                 type="text"
                 value={input.pname}
                 onChange={(e) => handleChange(e)}
+                placeholder="Scientific name, your personal name for it.. whatever you want"
               ></input>
             </div>
           </div>
           <div className="col-md-6">
             <div className="input-group">
               <label className="input-group-text">
-                Recommended watering
+                It wants water
               </label>
               <select
                 className="form-select"
@@ -128,7 +129,7 @@ function AddPlant(props) {
           </div>
           <div className="col-md-6">
             <div className="input-group">
-              <span className="input-group-text">Last time it was watered</span>
+              <span className="input-group-text">I watered it on</span>
               <input
                 className="form-control"
                 name="lastwater"
@@ -141,7 +142,7 @@ function AddPlant(props) {
           <div className="col-md-6">
             <div className="input-group">
               <label className="input-group-text">
-                Recommended fertilizing
+                It wants fertilizing
               </label>
               <select
                 className="form-select"
@@ -161,7 +162,7 @@ function AddPlant(props) {
           <div className="col-md-6">
             <div className="input-group">
               <span className="input-group-text">
-                Last time it was fertilized
+                I fertilized it on
               </span>
               <input
                 className="form-control"
@@ -187,7 +188,7 @@ function AddPlant(props) {
           <div className="col-md-6">
             <div className="input-group">
               <span className="input-group-text">
-                Last time it was repotted
+                I repotted it on
               </span>
               <input
                 className="form-control"
