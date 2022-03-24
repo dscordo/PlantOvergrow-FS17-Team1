@@ -4,7 +4,7 @@ import { DateTime, Interval } from "luxon";
 
 import Local from "../helpers/Local";
 import ExternalApi from "../helpers/ExternalApi";
-import "./AddPlant.css";
+
 
 function AddPlant(props) {
   let navigate = useNavigate();
@@ -92,8 +92,8 @@ function AddPlant(props) {
     <div className="AddPlant">
       <h2>Add New Plant</h2>
       <div className="container">
-      <div className="form-center">
-        <form onSubmit={(e) => handleSubmit(e)} className="row g-3 align-self-center">
+      <div className="form-center px-3 mx-3">
+        <form onSubmit={(e) => handleSubmit(e)} className="row g-3">
           <div className="col-md-12">
             <div className="input-group mb-3">
               <span className="input-group-text">Plant name</span>
@@ -108,7 +108,7 @@ function AddPlant(props) {
           </div>
           <div className="col-md-6">
             <div className="input-group">
-              <label className="input-group-text" htmlFor="fertfreq">
+              <label className="input-group-text">
                 Recommended watering
               </label>
               <select
@@ -140,7 +140,7 @@ function AddPlant(props) {
           </div>
           <div className="col-md-6">
             <div className="input-group">
-              <label className="input-group-text" htmlFor="fertfreq">
+              <label className="input-group-text">
                 Recommended fertilizing
               </label>
               <select
@@ -227,7 +227,7 @@ function AddPlant(props) {
               </label>
             </div>
           </div>
-          <div className="col-9">
+          <div className="col-12">
             <button className="btn btn-success" type="submit">
               Submit
             </button>
