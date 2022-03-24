@@ -66,6 +66,7 @@ function Wishlist(props) {
       console.log(error);
     }
   };
+
   function lightIcon(x) {
     if (x < 2500) {
       return "shade";
@@ -94,12 +95,6 @@ function Wishlist(props) {
       console.log(`Server error: ${err.message}`);
     }
   };
-
-
-
-
-
-
 
 
   // const handleChange = (e) => {
@@ -171,30 +166,24 @@ function Wishlist(props) {
             {completeInfo.map((p) => (
               <div className="col my-3" key={p.id}>
                 <div className="card text-center h-100">
-
+                  <div className="card-body">
                     <button
                       type="button"
                       className="btn-close"
                       aria-label="Close"
                       onClick={() => deleteTask(p.id)}
-                      data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
                     ></button>
-                    
-                    <div className="card-body">
                     <img className="card-img-top" src={p.image_url} />
-
                     <h5 className="card-title">{p.display_pid}</h5>
                     <ul className="list-group">
                       <li className="list-group-item list-group-item-success">
                         Light: {lightIcon(p.min_light_lux)}-
                         {lightIcon(p.max_light_lux)}
                       </li>
-
                       <li className="list-group-item list-group-item-success">
                         Temp in C: {p.min_temp}º-
                         {p.max_temp}º
                       </li>
-
                       <li className="list-group-item list-group-item-success">
                         Air Humidity: {p.min_env_humid}%-
                         {p.max_env_humid}%
@@ -204,7 +193,6 @@ function Wishlist(props) {
                         {p.max_soil_moist}%
                       </li>
                     </ul>
-
                     <div className="button-wrapper" style={{ padding: "20px" }}>
                       <button
                         type="button"
