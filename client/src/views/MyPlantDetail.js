@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { DateTime, Interval } from "luxon";
 
 import AuthApi from "../helpers/AuthApi";
@@ -13,7 +13,7 @@ export default function MyPlantDetail() {
   const [patchPlant, setPatchPlant] = useState({});
   const [apiDetail, setApiDetail] = useState();
   const [file, setFile] = useState(null);
-
+  let navigate = useNavigate();
   let { id } = useParams();
 
   useEffect(() => {
@@ -185,7 +185,7 @@ export default function MyPlantDetail() {
       let response = await fetch(`/plantinfo/image`, options);
       if (response.ok) {
         let data = await response.json();
-console.log("patch image worked", data);
+        console.log("patch image worked", data);
         navigate("/plantinfo", { replace: true });
       } else {
         console.log("server error:", response.statusText);
@@ -206,8 +206,27 @@ console.log("patch image worked", data);
   function handleFileChange(event) {
     setFile(event.target.files[0]);
     console.log(file);
-  }
- */
+  } */
+
+  const deleteTask = async (id) => {
+    let options = {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    };
+    try {
+      let response = await AuthApi.alterContent(`/plantinfo/${id}`, options);
+      console.log(response);
+      if (response.ok) {
+        navigate("/plantinfo", { replace: true });
+        //setWishlist(response.data);
+      } else {
+        console.log(`Server error: ${response.status} ${response.statusText}`);
+      }
+    } catch (err) {
+      console.log(`Server error: ${err.message}`);
+    }
+  };
+
   return (
     <div className="MyPlantDetail">
       <div className="Wrapper">
@@ -215,6 +234,15 @@ console.log("patch image worked", data);
           <div className="container" key={p.id}>
             <div className="row" style={{ paddingBottom: "20px" }}>
               <h3>{p.pname}</h3>
+              <button
+                type="button"
+                className="btn btn-success"
+                onClick={() => {
+                  deleteTask(p.id);
+                }}
+              >
+                Delete
+              </button>
             </div>
             {apiDetail ? (
               <div className="row row-cols-sm-1 row-cols-md-2">
