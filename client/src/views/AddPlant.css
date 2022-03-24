@@ -1,0 +1,16 @@
+.AddPlant {
+    display: block;
+    text-align: center;
+    justify-content: center;
+    margin: auto;
+    align-items: center;
+  }
+  
+  form {
+      display: inline-block;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: left;
+      padding: 5%;
+  }
+

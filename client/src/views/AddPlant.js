@@ -4,6 +4,7 @@ import { DateTime, Interval } from "luxon";
 
 import Local from "../helpers/Local";
 import ExternalApi from "../helpers/ExternalApi";
+import "./AddPlant.css";
 
 function AddPlant(props) {
   let navigate = useNavigate();
@@ -91,9 +92,10 @@ function AddPlant(props) {
     <div className="AddPlant">
       <h2>Add New Plant</h2>
       <div className="container">
-        <form onSubmit={(e) => handleSubmit(e)} className="row g-3">
-          <div className="col-md-10">
-            <div className="input-group">
+      <div className="form-center">
+        <form onSubmit={(e) => handleSubmit(e)} className="row g-3 align-self-center">
+          <div className="col-md-12">
+            <div className="input-group mb-3">
               <span className="input-group-text">Plant name</span>
               <input
                 className="form-control"
@@ -104,7 +106,7 @@ function AddPlant(props) {
               ></input>
             </div>
           </div>
-          <div className="col-md-5">
+          <div className="col-md-6">
             <div className="input-group">
               <label className="input-group-text" htmlFor="fertfreq">
                 Recommended watering
@@ -124,7 +126,7 @@ function AddPlant(props) {
               </select>
             </div>
           </div>
-          <div className="col-md-5">
+          <div className="col-md-6">
             <div className="input-group">
               <span className="input-group-text">Last time it was watered</span>
               <input
@@ -136,7 +138,7 @@ function AddPlant(props) {
               ></input>
             </div>
           </div>
-          <div className="col-md-5">
+          <div className="col-md-6">
             <div className="input-group">
               <label className="input-group-text" htmlFor="fertfreq">
                 Recommended fertilizing
@@ -156,7 +158,7 @@ function AddPlant(props) {
               </select>
             </div>
           </div>
-          <div className="col-md-5">
+          <div className="col-md-6">
             <div className="input-group">
               <span className="input-group-text">
                 Last time it was fertilized
@@ -170,7 +172,7 @@ function AddPlant(props) {
               ></input>
             </div>
           </div>
-          <div className="col-md-5">
+          <div className="col-md-6">
             <div className="input-group">
               <span className="input-group-text">Date of purchase</span>
               <input
@@ -182,7 +184,7 @@ function AddPlant(props) {
               ></input>
             </div>
           </div>
-          <div className="col-md-5">
+          <div className="col-md-6">
             <div className="input-group">
               <span className="input-group-text">
                 Last time it was repotted
@@ -196,7 +198,7 @@ function AddPlant(props) {
               ></input>
             </div>
           </div>
-          <div className="col-10">
+          <div className="col-12">
             <div className="form-floating">
               <textarea
                 className="form-control"
@@ -213,7 +215,7 @@ function AddPlant(props) {
             </div>
           </div>
 
-          <div className="col-10">
+          <div className="col-12">
             <div className="input-group">
               <input
                 type="file"
@@ -225,12 +227,13 @@ function AddPlant(props) {
               </label>
             </div>
           </div>
-          <div className="col-12">
+          <div className="col-9">
             <button className="btn btn-success" type="submit">
               Submit
             </button>
           </div>
         </form>
+        </div>
       </div>
     </div>
   );
