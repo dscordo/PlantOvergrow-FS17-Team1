@@ -103,6 +103,34 @@ router.patch("/:id", ensureUserLoggedIn, async (req, res) => {
     res.status(500).send({ error: err.message });
   }
 });
+//for userimage, testing
+router.patch("/image/:id", ensureUserLoggedIn, async (req, res) => {
+  let { id } = req.params;
+  let { file } = req.files;
+  let fromPath = file.tempFilePath;
+  let toPath = path.join(__dirname, "../public/images/") + file.name;
+  await fs.rename(fromPath, toPath);
+  image = file.name;
+  let sql = `UPDATE plantinfo SET userimage = ${image}  WHERE id =  ${id};`;
+  let sqlcheck = `SELECT * FROM plantinfo WHERE id = ${id} AND userid = ${req.userId};`;
+  try {
+    let result = await db(sqlcheck);
+    if (result.data.length === 0) {
+      res.status(404).send({ error: "plant not found!" });
+    } else {
+      console.log(sql, "else");
+      let test = await db(sql);
+      console.log("test!!!", test);
+      let result = await db(
+        `select * from plantinfo WHERE id = ${id} AND userid = ${req.userId};`
+      );
+      console.log(result, "result");
+      res.status(201).send(result.data);
+    }
+  } catch (err) {
+    res.status(500).send({ error: err.message });
+  }
+});
 
 // PATCH helper function
 function makePatchSql(body, id) {
@@ -126,17 +154,17 @@ function makePatchSql(body, id) {
   if ("notes" in body) {
     parts.push(`notes = '${body["notes"]}'`);
   }
-  if ("userimage" in body) {
-    parts.push(`userimage = '${body["userimage"]}'`);
-  }
+  /* if (file) {
+    parts.push(`userimage = '${image}'`);
+  } */
   if ("startdate" in body) {
     parts.push(`startdate = '${body["startdate"]}'`);
   }
 
   let sql = "UPDATE plantinfo SET ";
   sql += parts.join(", ");
-  sql += ` WHERE id = ${id}`;
-
+  sql += ` WHERE id = ${id};`;
+  console.log("from the helper", sql);
   return sql;
 }
 
