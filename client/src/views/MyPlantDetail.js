@@ -11,13 +11,21 @@ export default function MyPlantDetail() {
   const [errorMsg, setErrorMsg] = useState("");
   const [editNotes, setEditNotes] = useState(false);
   const [patchPlant, setPatchPlant] = useState({});
-  const [apiDetail, setApiDetail] = useState([]);
+  const [apiDetail, setApiDetail] = useState();
 
   let { id } = useParams();
 
   useEffect(() => {
     showPlantDetail();
   }, []);
+
+  useEffect(() => {
+    if (plantDetail.length) {
+      showApiDetail(plantDetail[0].pid); 
+      console.log("plantDetail", plantDetail);
+    }
+  
+  }, [plantDetail]);
 
   async function showPlantDetail() {
     let response = await AuthApi.getContent(`/plantinfo/${id}`);
@@ -28,8 +36,9 @@ export default function MyPlantDetail() {
       setPlantDetail();
       setErrorMsg(response.error);
     }
-    // showApiDetail(response.data.pid); untested
-  }
+    // console.log("pid", response.data.pid);
+    // showApiDetail(response.data.pid); //untested
+  };
 
   const handleChange = (e) => {
     setPatchPlant({ [e.target.name]: e.target.value });
@@ -69,7 +78,7 @@ export default function MyPlantDetail() {
     } catch (e) {
       console.log("network error:", e.message);
     }
-  }
+  };
 
   function waterStatus(a, b) {
     if (a < b) {
@@ -79,7 +88,7 @@ export default function MyPlantDetail() {
     } else {
       return "brown";
     }
-  }
+  };
 
   function fertStatus(a, b) {
     if (a < b) {
@@ -89,16 +98,19 @@ export default function MyPlantDetail() {
     } else {
       return "brown";
     }
-  }
+  };
 
   async function showApiDetail(pid) {
+    console.log("pid", pid);
+    console.log("we are here");
     let response = await ExternalApi.showDetails(pid);
-    if (response.ok) {
-      setApiDetail(response.data);
+    console.log("response", response);
+    if (response) {
+      setApiDetail(response);
     } else {
       setApiDetail(null);
     }
-  }
+  };
 
   /* } */
   function displayImage(image) {
@@ -109,11 +121,13 @@ export default function MyPlantDetail() {
     } else {
       return "http://localhost:5001/images/" + image;
     }
-  }
+  };
 
   return (
     <div className="MyPlantDetail">
       <div className="Wrapper">
+        {apiDetail && 
+        <p>{apiDetail.pid}</p>}
         {plantDetail.map((p) => (
           <div className="container" key={p.id}>
             <div className="row" style={{ paddingBottom: "20px" }}>
@@ -128,7 +142,6 @@ export default function MyPlantDetail() {
                   style={{ width: "300px" }}
                 />
               </div>
-
               <div className="col-md-6">
                 <table className="table table-success table-borderless table-striped">
                   <tbody>
@@ -183,10 +196,10 @@ export default function MyPlantDetail() {
                       </td>
                     </tr>
                     <tr>
-                      <th scope="row" colspan="2">
+                      <th scope="row" colSpan="2">
                         Recommended frequency{" "}
                       </th>
-                      <td colspan="1">every {p.wfreq} days</td>
+                      <td colSpan="1">every {p.wfreq} days</td>
                     </tr>
                     <tr>
                       <th scope="row">Last fertilized</th>
@@ -199,7 +212,6 @@ export default function MyPlantDetail() {
                         )}{" "}
                         days ago
                       </td>
-
                       <td>
                         <form>
                           <button
@@ -238,7 +250,7 @@ export default function MyPlantDetail() {
                       </td>
                     </tr>
                     <tr>
-                      <th scope="row" colspan="2">
+                      <th scope="row" colSpan="2">
                         Recommended frequency
                       </th>
                       <td> every {p.fertfreq} days</td>
@@ -289,9 +301,9 @@ export default function MyPlantDetail() {
                     </tr>
                     <tr>
                       <th scope="row">Notes</th>
-                      <td colspan="2">
+                      <td colSpan="2">
                         {editNotes ? (
-                          <td colspan="2">
+                          <td colSpan="2">
                             <div className="input-group">
                               <input
                                 type="text"
@@ -310,7 +322,7 @@ export default function MyPlantDetail() {
                           </td>
                         ) : (
                           <div>
-                            <table class="table mb-0">
+                            <table className="table mb-0">
                               <tbody>
                                 <tr>
                                   <td>{p.notes}</td>
@@ -341,4 +353,4 @@ export default function MyPlantDetail() {
       </div>
     </div>
   );
-}
+};
