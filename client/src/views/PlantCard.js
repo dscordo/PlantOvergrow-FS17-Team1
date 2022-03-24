@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 
 import AddPlant from "./AddPlant";
-
+import './PlantCard.css';
 import Local from "../helpers/Local";
 
 export default function PlantCard(props) {
@@ -71,13 +71,16 @@ export default function PlantCard(props) {
   return (
     <div className="PlantCard">
       <div className="container">
+        <div className="row justify-content-around">
+        <div className="col-md-6">
         <img
           src={plantDetail.image_url}
           alt="display image"
-          style={{ width: "300px" }}
-        ></img>
+        />
+        </div>
+        <div className="col-md-4 float-lg-end">
         <h5>{plantDetail.display_pid}</h5>
-        <ul>
+        <ul className="list-group">
           <li className="list-group-item list-group-item-success">
             Light: {lightIcon(plantDetail.min_light_lux)}-
             {lightIcon(plantDetail.max_light_lux)}
@@ -94,18 +97,19 @@ export default function PlantCard(props) {
             {plantDetail.max_soil_moist}%
           </li>
         </ul>
-        <div className="button-wrapper" style={{ padding: "20px" }}>
+        <div className="button-wrapper">
           {props.user ? (
             <button
               type="button"
-              className="btn btn-outline-success"
+              className="btn btn-success"
               onClick={() => setAddPlant(true)}
+              style={{ margin: "5px"}}
             >
               Add to my plants
             </button>
           ) : (
             <Link to="/login">
-              <button type="button" className="btn btn-outline-success">
+              <button type="button" className="btn btn-success" style={{ margin: "5px"}}>
                 Add to my plants
               </button>
             </Link>
@@ -114,7 +118,7 @@ export default function PlantCard(props) {
             <Link to="/wishlist/">
               <button
                 type="button"
-                className="btn btn-outline-success"
+                className="btn btn-success"
                 onClick={addWishPlant}
               >
                 Add to wishlist
@@ -122,13 +126,19 @@ export default function PlantCard(props) {
             </Link>
           ) : (
             <Link to="/login">
-              <button type="button" className="btn btn-outline-success">
+              <button type="button" className="btn btn-success">
                 Add to wishlist
               </button>
             </Link>
           )}
+           </div>
         </div>
+        <div className="row align-items-center">
+        <div className="align-self-center" style={{ width: "100%", margin: "auto"}}>
         {addplant && <AddPlant pid={pid} userimage={plantDetail.image_url} />}
+        </div>
+        </div>
+        </div>
       </div>
     </div>
   );
