@@ -39,10 +39,10 @@ function ProfileView(props) {
       <div className="row row-cols-sm-1 row-cols-md-2">
       <div className="col-md-7">
       <img
-      src="https://www.whitmanco.com/wp-content/uploads/2018/04/blank-profile-picture-973460-277x300.png"
+      src="https://images.unsplash.com/photo-1523810192022-5a0fb9aa7ff8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1467&q=80"
       alt="profile image"
-      className="rounded-circle"
-      style={{ width: "160px" }}/>
+      className="img-thumbnail rounded"
+      style={{ width: "200px" }}/>
 
     </div>
     <div className="col-md-3"  style={{ paddingTop: "20px" }}>
