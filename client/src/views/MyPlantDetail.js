@@ -247,11 +247,9 @@ export default function MyPlantDetail() {
                   </div>
                   <div className="row row-cols-1 mx-4 px-3">
                   <div className="col-md-9">
-                  <div className="ms-5">
-                    <form onSubmit={handleSubmit2}>
-                    <label className="form-label" htmlFor="userimage"   style={{ margin: "10px" }}>
-                        Upload photo
-                      </label>
+                  <div className="ms-5 mt-4">
+                    <form onSubmit={handleSubmit2} >
+                 
                       <input
                         type="file"
                         className="form-control"
@@ -259,7 +257,7 @@ export default function MyPlantDetail() {
                         style={{ margin: "10px" }}
                       />
                       <button className="btn btn-success" type="submit">
-                        Submit
+                        Upload image
                       </button>
                     </form>
                     </div>
@@ -514,11 +512,8 @@ export default function MyPlantDetail() {
                 </div>
                 <div className="row row-cols-1 mx-4 px-3">
                   <div className="col-md-9">
-                  <div className="ms-5">
+                  <div className="ms-5 mt-4">
                     <form onSubmit={handleSubmit2}>
-                    <label className="form-label" htmlFor="userimage"   style={{ margin: "10px" }}>
-                        Upload photo
-                      </label>
                       <input
                         type="file"
                         className="form-control"
@@ -526,7 +521,7 @@ export default function MyPlantDetail() {
                         style={{ margin: "10px" }}
                       />
                       <button className="btn btn-success" type="submit">
-                        Submit
+                      Upload image
                       </button>
                     </form>
                     </div>
