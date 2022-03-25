@@ -74,7 +74,7 @@ function RegisterView(props) {
                         </label>
                     </div>
 
-                    <button type="submit" className="btn btn-primary">Submit</button>
+                    <button type="submit" className="btn btn-success">Submit</button>
                 </form>
             </div>
         </div>
