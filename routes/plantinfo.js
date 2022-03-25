@@ -111,7 +111,7 @@ router.patch("/image/:id", ensureUserLoggedIn, async (req, res) => {
   let toPath = path.join(__dirname, "../public/images/") + file.name;
   await fs.rename(fromPath, toPath);
   image = file.name;
-  let sql = `UPDATE plantinfo SET userimage = ${image}  WHERE id =  ${id};`;
+  let sql = `UPDATE plantinfo SET userimage = "${image}"  WHERE id =  ${id};`;
   let sqlcheck = `SELECT * FROM plantinfo WHERE id = ${id} AND userid = ${req.userId};`;
   try {
     let result = await db(sqlcheck);
@@ -119,8 +119,8 @@ router.patch("/image/:id", ensureUserLoggedIn, async (req, res) => {
       res.status(404).send({ error: "plant not found!" });
     } else {
       console.log(sql, "else");
-      let test = await db(sql);
-      console.log("test!!!", test);
+      await db(sql);
+      // console.log("test!!!", test);
       let result = await db(
         `select * from plantinfo WHERE id = ${id} AND userid = ${req.userId};`
       );
