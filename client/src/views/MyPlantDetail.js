@@ -233,48 +233,37 @@ export default function MyPlantDetail() {
           <div className="container" key={p.id}>
             <div className="row" style={{ paddingBottom: "20px" }}>
               <h3>{p.pname}</h3>
-              <button
-                type="button"
-                className="btn btn-success"
-                onClick={() => {
-                  deleteTask(p.id);
-                }}
-              >
-                Delete
-              </button>
             </div>
             {apiDetail ? (
               <div className="row row-cols-sm-1 row-cols-md-2">
                 <div className="col-md-6">
+                  <div className="row row-cols-1">
                   <img
-                    className="card-img-top"
+                    className="img-thumbnail rounded float-start"
                     src={displayImage(p.userimage)}
                     alt="display image"
                     style={{ width: "300px" }}
                   />
-                  {/* {<button
-                    type="button"
-                    className="btn btn-success"
-                    onClick={() => {
-                      
-                    }}
-                  >
-                    Upload my photo
-                  </button>} */}
-                  <div className="input-group">
+                  </div>
+                  <div className="row row-cols-1 mx-4 px-3">
+                  <div className="col-md-9">
+                  <div className="ms-5">
                     <form onSubmit={handleSubmit2}>
+                    <label className="form-label" htmlFor="userimage"   style={{ margin: "10px" }}>
+                        Upload photo
+                      </label>
                       <input
                         type="file"
                         className="form-control"
                         onChange={handleFileChange}
+                        style={{ margin: "10px" }}
                       />
-                      <label className="input-group-text" htmlFor="userimage">
-                        Upload my photo
-                      </label>
                       <button className="btn btn-success" type="submit">
                         Submit
                       </button>
                     </form>
+                    </div>
+                  </div>
                   </div>
                 </div>
                 <div className="col-md-6">
@@ -515,13 +504,35 @@ export default function MyPlantDetail() {
             ) : (
               <div className="row row-cols-sm-1 row-cols-md-2">
                 <div className="col-md-6">
+                <div className="row row-cols-1">
                   <img
-                    className="card-img-top"
+                    className="img-thumbnail rounded float-start"
                     src={displayImage(p.userimage)}
                     alt="display image"
                     style={{ width: "300px" }}
                   />
                 </div>
+                <div className="row row-cols-1 mx-4 px-3">
+                  <div className="col-md-9">
+                  <div className="ms-5">
+                    <form onSubmit={handleSubmit2}>
+                    <label className="form-label" htmlFor="userimage"   style={{ margin: "10px" }}>
+                        Upload photo
+                      </label>
+                      <input
+                        type="file"
+                        className="form-control"
+                        onChange={handleFileChange}
+                        style={{ margin: "10px" }}
+                      />
+                      <button className="btn btn-success" type="submit">
+                        Submit
+                      </button>
+                    </form>
+                    </div>
+                  </div>
+                  </div>
+                  </div>
                 <div className="col-md-6">
                   <table className="table table-success table-borderless table-striped">
                     <tbody>
@@ -729,6 +740,19 @@ export default function MyPlantDetail() {
                 </div>
               </div>
             )}
+            <div className="row">
+            <div className="col-12">
+            <button
+                type="button"
+                className="btn btn-success"
+                onClick={() => {
+                  deleteTask(p.id);
+                }}
+              >
+                Delete
+              </button>
+              </div>
+            </div>
           </div>
         ))}
       </div>
