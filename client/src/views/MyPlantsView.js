@@ -67,24 +67,22 @@ function MyPlantsView(props) {
           {myPlants.map((p) => (
             <div className="col my-3" key={p.id}>
               <div className="card text-center h-100">
-                <div className="card-body">
+                
                   <Link to={`/plantinfo/${p.id}`}>
                     <img
-                      className="card-img-top"
+                      className="card-img-top m-3"
                       src={displayImage(p.userimage)}
                       alt="display image"
-                      style={{ width: "300px" }}
+                      style={{ width: "300px", height: "300px" }}
                     />
                   </Link>
+                  <div className="card-body">
                   <h5 className="card-title">
-                    {p.pname}
-                    {p.pid != "undefined" ? ", " + p.pid : ""}
-                  </h5>
-                  <table className="table table-success table-borderless table-striped">
-                    <tbody>
-                      <tr>
-                        <th scope="row">Watering status</th>
-                        <td>
+
+                    {p.pid === "undefined" ? p.pname 
+                    : p.pname === "" ? p.pid 
+                    : p.pname + ", " + p.pid}
+
                           <span className="badge rounded-pill bg-light text-dark">
                             {
                               <svg
@@ -110,11 +108,7 @@ function MyPlantsView(props) {
                               </svg>
                             }
                           </span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Fert status</th>
-                        <td>
+
                           <span className="badge rounded-pill bg-light text-dark">
                             {
                               <svg
@@ -140,10 +134,8 @@ function MyPlantsView(props) {
                               </svg>
                             }
                           </span>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+                          </h5>
+
                 </div>
               </div>
             </div>

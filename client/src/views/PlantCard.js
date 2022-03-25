@@ -86,6 +86,7 @@ export default function PlantCard(props) {
         <img
           src={plantDetail.image_url}
           alt="display image"
+          className="img-thumbnail rounded"
         />
         </div>
         <div className="col-md-4 float-lg-end">
