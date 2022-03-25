@@ -154,7 +154,6 @@ export default function MyPlantDetail() {
     }
   }
 
-  /* } */
   function displayImage(image) {
     if (!image || image === "undefined") {
       return "https://images.unsplash.com/photo-1587334274328-64186a80aeee?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzZ8fHBsYW50fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60";
@@ -169,7 +168,7 @@ export default function MyPlantDetail() {
     DateTime.fromISO(p.lastwater).toLocaleString(DateTime.DATETIME_SHORT);
   } */
   //------
-  /* async function patchPlant(formData) {
+  async function patchImage(formData) {
     let options = {
       method: "PATCH",
       headers: {},
@@ -182,7 +181,7 @@ export default function MyPlantDetail() {
     }
 
     try {
-      let response = await fetch(`/plantinfo/image`, options);
+      let response = await fetch(`/plantinfo/image/${id}`, options);
       if (response.ok) {
         let data = await response.json();
         console.log("patch image worked", data);
@@ -200,13 +199,13 @@ export default function MyPlantDetail() {
     console.log("this is handlesubmit2", file);
     const formData = new FormData();
     formData.append("file", file, file.name);
-    patchPlant(formData);
+    patchImage(formData);
   };
 
   function handleFileChange(event) {
     setFile(event.target.files[0]);
-    console.log(file);
-  } */
+    console.log("en handlefilechange", file);
+  }
 
   const deleteTask = async (id) => {
     let options = {
@@ -253,14 +252,38 @@ export default function MyPlantDetail() {
                     alt="display image"
                     style={{ width: "300px" }}
                   />
+                  {/* {<button
+                    type="button"
+                    className="btn btn-success"
+                    onClick={() => {
+                      
+                    }}
+                  >
+                    Upload my photo
+                  </button>} */}
+                  <div className="input-group">
+                    <form onSubmit={handleSubmit2}>
+                      <input
+                        type="file"
+                        className="form-control"
+                        onChange={handleFileChange}
+                      />
+                      <label className="input-group-text" htmlFor="userimage">
+                        Upload my photo
+                      </label>
+                      <button className="btn btn-success" type="submit">
+                        Submit
+                      </button>
+                    </form>
+                  </div>
                 </div>
                 <div className="col-md-6">
                   <table className="table table-success table-borderless table-striped">
                     <tbody>
                       <tr>
-                        <th scope="row" width="33%">
+                        <td scope="row" width="33%">
                           Scientific name:
-                        </th>
+                        </td>
                         <td width="33%" colSpan="2">
                           {apiDetail.display_pid}
                         </td>
