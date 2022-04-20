@@ -33,7 +33,7 @@ function ensureUserLoggedIn(req, res, next) {
 
 
 /**
- * Make sure user is logged in and is accessing his/her own page.
+ * Make sure user is logged in and is accessing their own page.
  * i.e. userId in token === userId in URL param
  **/
 

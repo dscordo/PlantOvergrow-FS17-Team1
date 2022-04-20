@@ -3,7 +3,7 @@ var router = express.Router();
 const db = require("../model/helper");
 const { ensureUserLoggedIn } = require("../middleware/guards");
 
-//working
+
 router.get("/", ensureUserLoggedIn, async (req, res) => {
   try {
     let results = await db(`SELECT * FROM wishlist WHERE userid = ${req.userId}  ORDER BY id ASC;`);
@@ -13,7 +13,7 @@ router.get("/", ensureUserLoggedIn, async (req, res) => {
     res.status(500).send({ error: err.message });
   }
 });
-//working
+
 router.get("/:id", ensureUserLoggedIn, async (req, res, next) => {
   let id = req.params.id;
   try {
@@ -28,7 +28,7 @@ router.get("/:id", ensureUserLoggedIn, async (req, res, next) => {
   }
 });
 
-//CHECK IF WORKING WITH USERID
+
 router.post("/", ensureUserLoggedIn, async (req, res) => {
   let { pid, image_url } = req.body;
 
@@ -48,7 +48,7 @@ router.post("/", ensureUserLoggedIn, async (req, res) => {
   }
 });
 
-//CHECK IF WORKING WITH USERID
+
 router.patch("/:id", ensureUserLoggedIn, async (req, res) => {
   let id = req.params.id;
   let { notes } = req.body;
@@ -69,7 +69,7 @@ router.patch("/:id", ensureUserLoggedIn, async (req, res) => {
   }
 });
 
-//CHECK IF WORKING WITH USERID
+
 router.delete("/:id", ensureUserLoggedIn, async (req, res) => {
   let id = req.params.id;
   console.log("ID!!!!", id);

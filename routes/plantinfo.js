@@ -5,7 +5,7 @@ const { ensureUserLoggedIn } = require("../middleware/guards");
 const fs = require("fs/promises");
 const path = require("path");
 
-//working
+
 router.get("/", ensureUserLoggedIn, async (req, res) => {
   try {
     let results = await db(
@@ -18,7 +18,7 @@ router.get("/", ensureUserLoggedIn, async (req, res) => {
   }
 });
 
-//working
+
 router.get("/:id", ensureUserLoggedIn, async (req, res, next) => {
   let id = req.params.id;
   try {
@@ -35,7 +35,7 @@ router.get("/:id", ensureUserLoggedIn, async (req, res, next) => {
   }
 });
 
-//POST - CHECK IF WORKING WITH FILE UPLOAD
+//POST
 router.post("/", ensureUserLoggedIn, async (req, res) => {
   // if req.file - do this
   let {
@@ -69,7 +69,7 @@ router.post("/", ensureUserLoggedIn, async (req, res) => {
 `;
 
   try {
-    // await fs.rename(fromPath, toPath);
+  
 
     await db(sql);
 
@@ -103,7 +103,7 @@ router.patch("/:id", ensureUserLoggedIn, async (req, res) => {
     res.status(500).send({ error: err.message });
   }
 });
-//for userimage, testing
+//for userimage
 router.patch("/image/:id", ensureUserLoggedIn, async (req, res) => {
   let { id } = req.params;
   let { file } = req.files;
@@ -120,7 +120,6 @@ router.patch("/image/:id", ensureUserLoggedIn, async (req, res) => {
     } else {
       console.log(sql, "else");
       await db(sql);
-      // console.log("test!!!", test);
       let result = await db(
         `select * from plantinfo WHERE id = ${id} AND userid = ${req.userId};`
       );
@@ -154,9 +153,7 @@ function makePatchSql(body, id) {
   if ("notes" in body) {
     parts.push(`notes = '${body["notes"]}'`);
   }
-  /* if (file) {
-    parts.push(`userimage = '${image}'`);
-  } */
+
   if ("startdate" in body) {
     parts.push(`startdate = '${body["startdate"]}'`);
   }
@@ -168,7 +165,6 @@ function makePatchSql(body, id) {
   return sql;
 }
 
-//working and fixed result to show what's left
 router.delete("/:id", ensureUserLoggedIn, async (req, res) => {
   let id = req.params.id;
   try {

@@ -4,7 +4,6 @@ import "./App.css";
 
 import Local from "./helpers/Local";
 import AuthApi from "./helpers/AuthApi";
-// import Api from './helpers/Api'; // Laura
 
 import NavBar from "./components/NavBar";
 
@@ -15,13 +14,11 @@ import ErrorView from "./views/ErrorView";
 import MyPlantsView from "./views/MyPlantsView";
 import MyPlantDetail from "./views/MyPlantDetail";
 import ProfileView from "./views/ProfileView";
-//import UsersView from "./views/UsersView";
 import Wishlist from "./views/Wishlist";
 import SearchPlantView from "./views/SearchPlantView";
 import SearchDetailView from "./views/SearchDetailView";
 import PlantCard from "./views/PlantCard";
 import AddPlant from "./views/AddPlant";
-//import WishDetail from "./views/WishDetail";
 
 function App() {
   const [user, setUser] = useState(Local.getUser());
@@ -65,8 +62,6 @@ function App() {
 
       <div className="container">
         <Routes>
-          {/* <Route path="/" element={<h1>Home</h1>} /> */}
-          {/* <Route path="/users" element={<UsersView />} /> */}
           <Route
             path="/users/:userId"
             element={
@@ -99,14 +94,6 @@ function App() {
               </PrivateRoute>
             }
           />
-          {/* <Route
-            path="/wishlist/:id"
-            element={
-              <PrivateRoute>
-                <WishDetail />
-              </PrivateRoute>
-            }
-          /> */}
           <Route
             path="/addplant"
             element={

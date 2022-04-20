@@ -35,8 +35,6 @@ export default function MyPlantDetail() {
       setPlantDetail();
       setErrorMsg(response.error);
     }
-    // console.log("pid", response.data.pid);
-    // showApiDetail(response.data.pid); //untested
   }
 
   const handleChange = (e) => {
@@ -48,7 +46,6 @@ export default function MyPlantDetail() {
     setEditNotes(false);
   };
 
-  //patch working
 
   async function doPatch(id, modification) {
     let options = {
@@ -144,7 +141,6 @@ export default function MyPlantDetail() {
     }
   }
 
-  //this shows an error in the console if there is no API info
   async function showApiDetail(pid) {
     let response = await ExternalApi.showDetails(pid);
     if (response) {
@@ -163,16 +159,12 @@ export default function MyPlantDetail() {
       return "http://localhost:5001/images/" + image;
     }
   }
-  //-----luxon---
-  /* {
-    DateTime.fromISO(p.lastwater).toLocaleString(DateTime.DATETIME_SHORT);
-  } */
-  //------
+
   async function patchImage(formData) {
     let options = {
       method: "PATCH",
       headers: {},
-      body: formData, //
+      body: formData,
     };
 
     let token = Local.getToken();
@@ -217,7 +209,6 @@ export default function MyPlantDetail() {
       console.log(response);
       if (response.ok) {
         navigate("/plantinfo", { replace: true });
-        //setWishlist(response.data);
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
       }

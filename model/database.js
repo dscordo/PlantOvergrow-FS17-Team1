@@ -1,7 +1,7 @@
 require("dotenv").config();
 const mysql = require("mysql");
 
-const fs = require("fs"); //sofia
+const fs = require("fs");
 
 const DB_HOST = process.env.DB_HOST;
 const DB_USER = process.env.DB_USER;
@@ -21,7 +21,6 @@ con.connect(function (err) {
   console.log("Connected!");
 
   let sql = fs.readFileSync(__dirname + "/plantovergrow.sql").toString();
-  //maybe this should be plant_db_db or something...
 
   con.query(sql, function (err, result) {
     if (err) throw err;

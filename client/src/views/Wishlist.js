@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-//import { Link } from "react-router-dom";
 
 import AddPlant from "./AddPlant";
 
@@ -32,7 +31,6 @@ function Wishlist(props) {
     if (response.ok) {
       setWishlist(response.data);
       setErrorMsg("");
-      //console.log("1");
     } else {
       setWishlist([]);
       setErrorMsg(response.error);

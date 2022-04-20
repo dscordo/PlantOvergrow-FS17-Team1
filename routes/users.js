@@ -20,7 +20,7 @@ router.get('/', async function(req, res, next) {
 
 /**
 * Get one user.
-* A user can only see his/her own profile info.
+* A user can only see their own profile info.
 **/
 
 router.get('/:userId', ensureSameUser, async function(req, res, next) {
@@ -29,7 +29,7 @@ router.get('/:userId', ensureSameUser, async function(req, res, next) {
   
   try {
       let results = await db(sql);
-      // We know user exists because he/she is logged in!
+      // We know user exists because they are logged in!
       let user = results.data[0];
       delete user.password;  // don't return the password
       res.send(user);

@@ -14,7 +14,6 @@ function RegisterView(props) {
 
     function handleChange(event) {
         let {name, value} = event.target;
-        // console.log(newUser);
         setNewUser(newUser => ({
         ...newUser, [name]:value
         
