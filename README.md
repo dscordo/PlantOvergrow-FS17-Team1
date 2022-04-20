@@ -7,6 +7,8 @@ This is a team project by Cristina, Deborah and Laura.
 To get started, run `npm install`, followed by `npm start` in the project folder.
 Repeat the same step in the client folder.
 
+In order to generate the API token, register at [Open Plant Book](https://open.plantbook.io/). The token has a lifecycle of 24 hours.
+
 ## Technologies used
 
 - Express
@@ -15,7 +17,9 @@ Repeat the same step in the client folder.
 - [External API](https://open.plantbook.io/)
 - Bootstrap
 - Luxon
-- Custom CSS
+- CSS
+- JSON web token
+- bcrypt
 
 ## User flow
 
