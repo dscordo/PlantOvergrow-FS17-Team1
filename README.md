@@ -2,6 +2,10 @@
 
 This is a team project by Cristina, Deborah and Laura.
 
+![homepage](./RMimages/homepage.jpg)
+
+![My Plants - where user sees collection of their plants](./RMimages/myplantsview.jpg)
+
 ## Set up
 
 To get started, run `npm install`, followed by `npm start` in the project folder.
